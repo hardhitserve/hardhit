@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {useEffect}from 'react';
 import './home.css';
 import { Link } from 'react-router-dom';
 import Footer from './footer';
-class HomePage extends React.Component {
-  render() {
+
+function HomePage(){
+
+  useEffect(() => {
+  document.title = "HardHit Homepage | Home"
+  }, [])
+  
     return (
       <div>
         <header>
@@ -52,6 +57,6 @@ class HomePage extends React.Component {
       </div>
     );
   }
-}
+
 
 export default HomePage;

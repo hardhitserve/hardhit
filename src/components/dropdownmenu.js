@@ -25,8 +25,9 @@ const DropdownMenu = () => {
   const provider = window.ethereum
 
   useEffect(
-
+    
     ()=>{
+      document.title = "Send OFTV2 to cross chains | Send Tokens";
 
       async function connectButton(){
 

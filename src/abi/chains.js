@@ -168,9 +168,6 @@ export const chains = {
     
 
 
-
-
-
    
 }
 
@@ -187,6 +184,7 @@ export const network = {
   "0x14A33":"Base",
   "0xA704":"Linea",
   "0x58A":"Zkevm-testnet",
+  "0xAA36A7" : "Sepolia",
 
   // MAinnets
   "0x1":"Ethereum",
@@ -204,8 +202,31 @@ export const network = {
 
 }
 
+export const endpointContracts = {
+  "Ethereum": "0x66A71Dcef29A0fFBDBE3c6a460a3B5BC225Cd675",
+  "Bsc": "0x3c2269811836af69497E5F486A85D7316753cf62",
+  "Avalanche": "0x3c2269811836af69497E5F486A85D7316753cf62",
+  "Polygon": "0x3c2269811836af69497E5F486A85D7316753cf62",
+  "Arbitrum": "0x3c2269811836af69497E5F486A85D7316753cf62",
+  "Optimism": "0x3c2269811836af69497E5F486A85D7316753cf62",
+  "Fantom": "0xb6319cC6c8c27A8F5dAF0dD3DF91EA35C4720dd7",
 
-
+  "Goerli": "0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23",
+  "Bsc-testnet": "0x6Fcb97553D41516Cb228ac03FdC8B9a0a9df04A1",
+  "Fuji": "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
+  "Mumbai": "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
+  "Arbitrum-goerli": "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+  "Optimism-goerli": "0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1",
+  "Fantom-testnet": "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
+  "Meter-testnet": "0x3De2f3D1Ac59F18159ebCB422322Cb209BA96aAD",
+  "Zksync-testnet": "0x093D2CF57f764f09C3c2Ac58a42A2601B8C79281",
+  "Scroll-testnet"        :"0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1",
+  "Polygon-zkevm" :"0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+  "Linea-testnet"         : "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+  "Base-testnet"           : "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+  "Sepolia"       : "0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1",
+  "Moonbeam-alpha": "0xb23b28012ee92E8dE39DEb57Af31722223034747"
+}
 
 export const tokenContracts = {
   "Goerli":"0x1392c0654fe80bc8907AB4449f736757d088f150",

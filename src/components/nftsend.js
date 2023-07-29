@@ -1,10 +1,10 @@
 import {ethers} from 'ethers';
 import React, { useState,useEffect } from 'react';
-import {chains,chainIds,nftContracts,network} from '../abi/chains'
+import {chains,chainIds,nftContracts,network,endpointContracts} from '../abi/chains'
 import {waitForMessageReceived} from "@layerzerolabs/scan-client"
-import { optionsMainnet,optionsTestnet, } from '../abi/chainoptions';
+import { optionsMainnet,optionsTestnet,presentTestnet } from '../abi/chainoptions';
 import { Link } from 'react-router-dom';
-import { ERC721ABI } from '../abi/erc721abi';
+import { ERC721ABI,endpointAbi } from '../abi/erc721abi';
 import PopupMessage from './popup';
 
 function NftSend(){
@@ -12,7 +12,7 @@ function NftSend(){
   const [isOpen2, setIsOpen2] = useState(false);
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
-  const [options,setOption] = useState(optionsTestnet);
+  const [options,setOption] = useState(presentTestnet);
   const [colorset, setColor] = useState('')
   const [address, setAddress] = useState("");
   const [ tokenID, setTokenID] = useState('');
@@ -28,7 +28,7 @@ function NftSend(){
   useEffect(
 
     ()=>{
-
+      document.title = "Send ONFTV2 to cross chains | Send NFTs";
       async function connectButton(){
 
         try {
@@ -40,7 +40,6 @@ function NftSend(){
               method: 'eth_chainId',
             });
           
-           console.log(currentChainId)
            availableMint(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
            setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
 
@@ -82,7 +81,7 @@ function NftSend(){
            provider.request({
            method: 'wallet_addEthereumChain',
            params: [chains[args]],
-           }).then(response => console.log(response))
+           }).then(response => console.log(""))
          }
          }
  
@@ -144,7 +143,7 @@ function NftSend(){
 
 
  async function  availableMint(args){
-console.log(args)
+
   try {
     let abi = ERC721ABI;
     const contract_address = nftContracts[args]
@@ -162,7 +161,7 @@ console.log(args)
 
   } catch (error) {
 
-    console.log(error)
+  
 
   }
 
@@ -174,11 +173,11 @@ console.log(args)
   const mint = async ()=>{
 
     try {
-      console.log()
+    
       let abi = ERC721ABI;
-      console.log(abi)
+     
       const contract_address = nftContracts[networkset]
-      console.log(contract_address)
+     
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(contract_address,abi,signer);
@@ -187,15 +186,14 @@ console.log(args)
 
       // Set the desired gas limit (increase it from the default value)
       const gasLimits = ethers.getBigInt("300000");
-      console.log(gasLimits)
-      console.log(gas)
+    
       const tx = await contract.mint(
        
         {value:gas});
 
      
     } catch (error) {
-      console.log(error)
+     
       setError(error.toString().split('\n')[0])
 
     }
@@ -208,17 +206,18 @@ const send = async ()=>{
 
   try {
     const contract_address = nftContracts[selectedOption1.name];
-
+   
     const Abi = ERC721ABI;
   
     const provider = new ethers.BrowserProvider(window.ethereum);
   
     const signer = await provider.getSigner();
   
-    console.log(signer)
+   
   
     const contract = new ethers.Contract(contract_address,Abi,signer);
-  
+   
+    
     const toAddress = nftContracts[selectedOption2.name];
   
     let remoteChainId = chainIds[selectedOption2.name];
@@ -229,11 +228,11 @@ const send = async ()=>{
   
     let fees = await contract.estimateSendFee(remoteChainId, toAddressBytes, tokenID, false, adapterParams)
   
-    console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
+   // console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
   
     const gas = fees[0]
   
-    console.log(address)
+   
     
      let tx = await (
       await contract.sendFrom(
@@ -251,7 +250,7 @@ const send = async ()=>{
   
      await waitForMessageReceived(chainIds[selectedOption2.name],tx.hash).then(async (message) => {
      
-      console.log(message.status)
+   
 
       setError(message.status)
     
@@ -264,7 +263,7 @@ const send = async ()=>{
 
  
   }
-console.log(options[0]["color"])
+
 
     return(
         

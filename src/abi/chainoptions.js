@@ -65,6 +65,23 @@ export const optionsTestnet = [
       },
   ];
   
+  export const  presentTestnet = [
+    {
+      id: 1,
+      name: 'Goerli',
+      imageSrc: './blockchainlogos/ethereum.png', // Replace with your image file path
+      color:'pink'
+    },  {
+      id: 3,
+      name: 'Mumbai',
+      imageSrc: './blockchainlogos/polygonmatic.png', // Replace with your image file path
+    },
+    {
+      id: 14,
+      name: 'Sepolia',
+      imageSrc: './blockchainlogos/ethereum.png', // Replace with your image file path
+    },
+  ]
 
   export const optionsMainnet = [
     {

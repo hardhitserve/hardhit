@@ -1,14 +1,14 @@
-import {ethers} from 'ethers';
+import {ethers, toBigInt} from 'ethers';
 import React, { useState } from 'react';
-import {chains,chainIds, nftContracts} from '../abi/chains'
+import {chains,chainIds, nftContracts,endpointContracts} from '../abi/chains'
 import {waitForMessageReceived} from "@layerzerolabs/scan-client"
 import { optionsMainnet,optionsTestnet } from '../abi/chainoptions';
 import PopupMessage from './popup';
-import { ERC721ABI } from '../abi/erc721abi';
-
+import { ERC721ABI ,endpointAbi} from '../abi/erc721abi';
+import Footer from './footer';
 
 function Gas(){
-  
+  document.title = "Send Native Gas cross chains | Send Native Gas";
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [selectedOption1, setSelectedOption1] = useState(null);
@@ -39,7 +39,7 @@ function Gas(){
            ethereum.request({
            method: 'wallet_addEthereumChain',
            params: [chains[args]],
-           }).then(response => console.log(response))
+           }).then(response => console.log(""))
          }
          }
  
@@ -108,33 +108,42 @@ const send = async ()=>{
 
     const contract_address = nftContracts[selectedOption1.name];
 
+    const endpoint_contract = endpointContracts[selectedOption1.name]
+
     const Abi = ERC721ABI;
-  
+
     const provider = new ethers.BrowserProvider(window.ethereum);
   
     const signer = await provider.getSigner();
   
     const contract = new ethers.Contract(contract_address,Abi,signer);
+    const endpoint = new ethers.Contract(endpoint_contract,endpointAbi,signer)
+  
   
     let remoteChainId = chainIds[selectedOption2.name];
-  
+
     let adapterParams = ethers.solidityPacked(
     ["uint16", "uint", "uint", "address"],
-    [2, 350000, amount, address])
+    [2, 350000, ethers.parseUnits(amount,'ether') , address])
+   
+
+    let fees = await endpoint.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams)
+
   
-    let fees = await contract.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams)
-  
-    console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
-  
-  
+  //  console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
+
+    const gas = ethers.parseUnits(ethers.formatEther(fees[0]* ethers.toBigInt(2)).toString(),'ether')
+
+   
+   
     let tx = await (
   
     await contract.bridgeGas(            
-                                          // 'from' address to send tokens
+                                  // 'from' address to send tokens
           remoteChainId,                 // remote LayerZero chainId
           ethers.ZeroAddress ,
           adapterParams,                     // amount of tokens to send (in wei)
-          { value: fees[0] }
+          { value:gas}
       )
       
      ).wait()
@@ -143,7 +152,7 @@ const send = async ()=>{
      
      await waitForMessageReceived(chainIds[selectedOption2.name],tx.transactionHash).then(async (message) => {
  
-      console.log(message.status)
+
 
       setError(message.status)
       
@@ -151,7 +160,7 @@ const send = async ()=>{
       })
   } catch (error) {
 
-     
+
     setError(error.toString().split('\n')[0])
 
   }
@@ -183,7 +192,7 @@ const send = async ()=>{
           </div>
       
          
-          <div class="selectchains">
+          <div className="selectchains">
               <div className="fromchain">
               <div className="dropdown-container">
             <button className="dropdown-button" onClick={toggleDropdown1}>
@@ -242,9 +251,9 @@ const send = async ()=>{
               
         
       <div>
-        <p style={{color:"white"}}>Amount</p>
+        <p style={{color:"white"}}>Amount In Destination Chain</p>
       
-        <input type="number" name="Quantity" style={{width:150,fontSize:15}} onChange={(e)=>{
+        <input type="number" name="Amount" style={{width:100,fontSize:18,height:20}} onChange={(e)=>{
           
           setAmount(e.target.value)}} />
       </div>
@@ -263,6 +272,7 @@ const send = async ()=>{
       </div>
 
       <PopupMessage error={errorMessage} />
+      <Footer/>
           </div>
         
       

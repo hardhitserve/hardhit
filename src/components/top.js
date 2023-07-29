@@ -53,7 +53,10 @@ function Header(){
             method: 'eth_getBalance',
             params: [res[0], 'latest'],
           });
-  
+
+          
+          // window.ethereum.on('chainChanged', ()=>{console.log("jhbjh")});
+
         setBalance((ethers.formatEther(balance)).substring(0, 5)+" ETH")
             setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
   
@@ -70,6 +73,19 @@ function Header(){
     }
   )
  
+
+
+window.ethereum.on('chainChanged',async ()=>{  
+
+  const currentChainId = await provider.request({
+    method: 'eth_chainId',
+  });
+
+  
+  setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]);} 
+  
+  );
+
 
   async function isConnected() {
 
