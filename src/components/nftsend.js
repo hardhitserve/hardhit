@@ -184,13 +184,14 @@ function NftSend(){
       const gas = ethers.parseUnits('0.001','ether')
      
 
-      // Set the desired gas limit (increase it from the default value)
-      const gasLimits = ethers.getBigInt("300000");
-    
-      const tx = await contract.mint(
-       
-        {value:gas});
 
+     let tx = await( await contract.mint(
+       
+      {value:gas})
+      
+      ).wait()
+      
+      tx.transactionHash?setError("minted"):setError("minting")
      
     } catch (error) {
      
@@ -213,11 +214,8 @@ const send = async ()=>{
   
     const signer = await provider.getSigner();
   
-   
-  
     const contract = new ethers.Contract(contract_address,Abi,signer);
    
-    
     const toAddress = nftContracts[selectedOption2.name];
   
     let remoteChainId = chainIds[selectedOption2.name];
@@ -228,23 +226,23 @@ const send = async ()=>{
   
     let fees = await contract.estimateSendFee(remoteChainId, toAddressBytes, tokenID, false, adapterParams)
   
-   // console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
+   console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
   
-    const gas = fees[0]
-  
+    const gas = fees[0]*ethers.toBigInt(2)
    
     
-     let tx = await (
-      await contract.sendFrom(
+     const tx =  await contract.sendFrom(
           address,                 // 'from' address to send tokens
           remoteChainId,                 // remote LayerZero chainId
-          toAddressBytes,                     // 'to' address to send tokens
-          tokenID,                           // amount of tokens to send (in wei)
-          [address, ethers.ZeroAddress,'0x'],
+          address,
+                              // 'to' address to send tokens
+          tokenID, 
+          address,                           // amount of tokens to send (in wei)
+          ethers.ZeroAddress,
+          adapterParams,
           { value: gas }
       )
-      
-     ).wait()
+ 
   
     
   
