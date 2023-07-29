@@ -1,0 +1,95 @@
+/* Navbar.css */
+
+header {
+    background-color: #222;
+    color: #fff;
+ 
+  }
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 100px;
+    height: 100px;
+   
+  }
+  
+  .project-name {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  .navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .navigation ul li {
+    margin-right: 20px;
+  }
+  
+  .navigation ul li a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .buttons-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .change-chain-button,
+  .connect-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    margin-left: 10px;
+    background-color: #e10bc1;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .change-chain-button:hover,
+  .connect-button:hover {
+    background-color: #e10bc1;
+  }
+  
+  @media (max-width: 768px) {
+    .logo {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .project-name {
+      font-size: 16px;
+    }
+  
+    .navigation ul li {
+      margin-right: 10px;
+    }
+  
+    .change-chain-button,
+    .connect-button {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+  
+
+
+
+ 
