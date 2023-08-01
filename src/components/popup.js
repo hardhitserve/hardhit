@@ -15,9 +15,9 @@ function PopupMessage  ({ error }) {
   }, [error]);
 
   return (
-    <div style={{  position: 'fixed', top: '100px', right: '20px', zIndex: 9999,minWidth:200,minHeight:100,display:message!==""?'block':'none',width:"auto" }}>
+    <div style={{  position: 'fixed', top: '100px', right: '20px', zIndex: 9999,minWidth:200,minHeight:100,maxWidth:500,display:message!==""?'block':'none',width:"auto" }}>
 
-        {error?  <div style={{ background: "red", color: 'white', padding: '10px', borderRadius: '4px', marginBottom: '5px',width:"auto", }}>{message}</div>:""
+        {error?  <div style={{ background: "#e10bc1", color: 'white', padding: '10px', borderRadius: '4px', marginBottom: '5px',width:"auto", }}>{message}</div>:""
 
 }
     

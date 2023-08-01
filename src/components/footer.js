@@ -2,14 +2,11 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <footer style={{ backgroundColor: 'black', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+    <footer style={{ backgroundColor: 'black', padding: '10px', display: 'flex', justifyContent: 'space-between', alignItems: 'center',marginTop:"50px" }}>
       <div>
-        <span style={{ fontWeight: 'bold',marginLeft:50 , color:"#e10bc1"}}><h2>HARDHITNFT</h2></span>
+        <span style={{ fontWeight: 'bold',marginLeft:50 , color:"#e10bc1"}}><h2>HARDHIT</h2></span>
       </div>
       <div>
-         <a style={{textDecoration:'none'}} href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
-          <i className="fab fa-facebook" style={{ margin: '0 5px', color:'whitesmoke' }}>FaceBook</i>
-        </a>
         <a  style={{textDecoration:'none'}} href="https://github.com/hardhitserve" target="_blank" rel="noopener noreferrer">
         <i className="fab fa-twitter" style={{ margin: '0 5px', color:'whitesmoke'  }}>Github</i>
         </a>

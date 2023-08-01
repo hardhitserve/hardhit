@@ -8,6 +8,7 @@ import DropdownMenu from './components/dropdownmenu'
 import './components/main.css'
 import Gas from './components/gas';
 
+
 function App() {
 
   
@@ -16,7 +17,7 @@ function App() {
     <div style={{ backgroundColor:'black',width:"100%",height:"100%", alignItems:"center"}} >
       
 
-      <Header style={{margin:"auto"}}></Header>
+      <Header style={{margin:"auto",backgroundColor:'black'}}></Header>
      
         <Routes>
 
@@ -37,8 +38,8 @@ function App() {
            
            </Route>
          
-
-           {/* <Route path="/image" element={ <ImageUpload />}>
+{/* 
+           <Route path="/remove" element={ <AppDropDown />}>
            
            </Route> */}
         </Routes>

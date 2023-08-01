@@ -2,7 +2,7 @@ import {ethers, toBigInt} from 'ethers';
 import React, { useState } from 'react';
 import {chains,chainIds, nftContracts,endpointContracts} from '../abi/chains'
 import {waitForMessageReceived} from "@layerzerolabs/scan-client"
-import { optionsMainnet,optionsTestnet } from '../abi/chainoptions';
+import { optionsMainnet,optionsTestnet,presentTestnet,testeObject,allowedChains } from '../abi/chainoptions';
 import PopupMessage from './popup';
 import { ERC721ABI ,endpointAbi} from '../abi/erc721abi';
 import Footer from './footer';
@@ -13,10 +13,12 @@ function Gas(){
   const [isOpen2, setIsOpen2] = useState(false);
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
-  const [options,setOption] = useState(optionsTestnet);
+  const [options,setOption] = useState(presentTestnet);
+  const [options2,setOption2] = useState(null);
   const [address, setAddress] = useState("");
   const [ amount, setAmount] = useState('');
-  const [errorMessage,setError]= useState("")
+  const [errorMessage,setError]= useState("");
+
 
   const ethereum = window.ethereum;
  
@@ -86,14 +88,25 @@ function Gas(){
   };
 
   const handleOptionSelect1 = (option) => {
-    
+   
     changeChain(option.name)
     setSelectedOption1(option);
     setIsOpen1(false);
+
+    let array = allowedChains[option.name]
+    console.log(array.length)
+    let testObject = [];
+  
+     for(let i=0;i<array.length;i++){
+      testObject[i]=(testeObject[array[i]])
+      console.log(testObject)
+     }
+    
+    setOption2(testObject)
   };
 
   const handleOptionSelect2 = (option) => {
-    
+   
     setSelectedOption2(option);
     setIsOpen2(false);
   };
@@ -117,8 +130,9 @@ const send = async ()=>{
     const signer = await provider.getSigner();
   
     const contract = new ethers.Contract(contract_address,Abi,signer);
-    const endpoint = new ethers.Contract(endpoint_contract,endpointAbi,signer)
-  
+    const endpoint = new ethers.Contract(endpoint_contract,endpointAbi,signer);
+
+    console.log(contract,endpoint)
   
     let remoteChainId = chainIds[selectedOption2.name];
 
@@ -126,16 +140,20 @@ const send = async ()=>{
     ["uint16", "uint", "uint", "address"],
     [2, 350000, ethers.parseUnits(amount,'ether') , address])
    
+   console.log(remoteChainId)
 
-    let fees = await endpoint.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams)
-
-  
-  //  console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
-
-    const gas = ethers.parseUnits(ethers.formatEther(fees[0]* ethers.toBigInt(2)).toString(),'ether')
+    let fees = await endpoint.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams);
 
    
-   
+   console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
+
+    const gas = ethers.parseUnits(ethers.formatEther(fees[0]).toString(),'ether')
+
+    const gasPrice = ethers.parseUnits('0.000000001', 'gwei');
+
+    const gasLimit =  21000;
+
+   console.log(remoteChainId,ethers.ZeroAddress,adapterParams,gas)
     let tx = await (
   
     await contract.bridgeGas(            
@@ -160,13 +178,11 @@ const send = async ()=>{
       })
   } catch (error) {
 
-
-    setError(error.toString().split('\n')[0])
+  
+    setError((error.reason))
 
   }
 
- 
- 
   }
 
     return(
@@ -184,7 +200,7 @@ const send = async ()=>{
           <div class="claim-heading">
         <div>
       
-        <h3 style={{color:"white",borderBottom:"2px solid #e10bc1", marginBottom:'10px', margin:'auto',paddingBottom:'10px'}} >Send Tokens</h3>
+        <h3 style={{color:"white",borderBottom:"2px solid #e10bc1", marginBottom:'10px', margin:'auto',paddingBottom:'10px'}} >Send Native Gas</h3>
       
         </div>
            
@@ -207,12 +223,20 @@ const send = async ()=>{
             </button>
             {isOpen1 && (
               <ul className="dropdown-options" style={{overflow:'visible'}}>
-                {options.map((option) => (
-                  <li key={option.id} onClick={() => handleOptionSelect1(option)}>
+                {options.map((option) =>
+
+              (
+                  
+                  <li key={option.id} style={{border:"1px solid pink"}} onClick={() => {
+                  handleOptionSelect1(option)
+                  }}>
                     <img src={option.imageSrc} alt={option.name} />
                     <span>{option.name}</span>
                   </li>
-                ))}
+                  
+                )
+                
+                )}
               </ul>
             )}
           </div>
@@ -233,12 +257,18 @@ const send = async ()=>{
             </button>
             {isOpen2 && (
               <ul className="dropdown-options">
-                {options.map((option) => (
-                  <li key={option.id} onClick={() => handleOptionSelect2(option)}>
+                {
+                
+                options2.map((option) => 
+                (
+                  <li key={option.id} style={{border:"1px solid pink"}} onClick={() => handleOptionSelect2(option)}>
                     <img src={option.imageSrc} alt={option.name} />
                     <span>{option.name}</span>
                   </li>
-                ))}
+                  
+                )
+              
+                )}
               </ul>
             )}
           </div>
@@ -270,7 +300,7 @@ const send = async ()=>{
 
            </div>
       </div>
-
+<p style={{fontStyle:'italic', color:'white',marginLeft:"20%",marginRight:"auto"}}>**Any extra fees will be refunded by the layerzero client</p>
       <PopupMessage error={errorMessage} />
       <Footer/>
           </div>

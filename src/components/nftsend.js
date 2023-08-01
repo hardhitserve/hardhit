@@ -2,24 +2,25 @@ import {ethers} from 'ethers';
 import React, { useState,useEffect } from 'react';
 import {chains,chainIds,nftContracts,network,endpointContracts} from '../abi/chains'
 import {waitForMessageReceived} from "@layerzerolabs/scan-client"
-import { optionsMainnet,optionsTestnet,presentTestnet } from '../abi/chainoptions';
+import { optionsMainnet,optionsTestnet,presentTestnet,allowedChains,testeObject } from '../abi/chainoptions';
 import { Link } from 'react-router-dom';
 import { ERC721ABI,endpointAbi } from '../abi/erc721abi';
 import PopupMessage from './popup';
-
+import Footer from './footer';
 function NftSend(){
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
   const [selectedOption1, setSelectedOption1] = useState(null);
   const [selectedOption2, setSelectedOption2] = useState(null);
   const [options,setOption] = useState(presentTestnet);
-  const [colorset, setColor] = useState('')
+  const [options2,setOption2] = useState(null);
   const [address, setAddress] = useState("");
   const [ tokenID, setTokenID] = useState('');
   const [errorMessage,setError] = useState("")
-  const [number,setNumber] = useState('')
+  const [number,setNumber] = useState('');
+  const [addressArray,setAddressArray] = useState([])
   const provider = window.ethereum;
- const [ networkset,setNetworkSet] = useState('')
+  const [ networkset,setNetworkSet] = useState('')
   const abiEncode = new ethers.AbiCoder();
   
 
@@ -28,12 +29,13 @@ function NftSend(){
   useEffect(
 
     ()=>{
+
       document.title = "Send ONFTV2 to cross chains | Send NFTs";
       async function connectButton(){
 
         try {
           const res = await provider.request({ method: 'eth_accounts' })
-
+          
           if (res.length === 0) {
 
             const currentChainId = await window.ethereum.request({
@@ -42,17 +44,21 @@ function NftSend(){
           
            availableMint(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
            setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
-
+           getTokenUri( )
+           
           } else {
      
             const currentChainId = await window.ethereum.request({
               method: 'eth_chainId',
             });
-        
+         
             setAddress(res[0]);
-            
+            getTokenUri()
+
             availableMint(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
            setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
+          // getTokenUri( connectButton(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]))
+
           } 
         } catch (error) {
           setError("Wallet Not Connected")
@@ -100,7 +106,7 @@ function NftSend(){
  
        setAddress(accounts[0]);
 
-       availableMint()
+       
        
 
      } else {
@@ -110,7 +116,7 @@ function NftSend(){
        await provider.send("eth_requestAccounts", []).then(async res=>{
           setAddress(res[0])
        })
-       availableMint()
+     
      }
   }
 
@@ -133,6 +139,14 @@ function NftSend(){
     changeChain(option.name)
     setSelectedOption1(option);
     setIsOpen1(false);
+    let array = allowedChains[option.name]
+    let testObject = [];
+     for(let i=0;i<array.length;i++){
+      testObject[i]=(testeObject[array[i]])
+      
+     }
+    
+    setOption2(testObject)
   };
 
   const handleOptionSelect2 = (option) => {
@@ -147,17 +161,14 @@ function NftSend(){
   try {
     let abi = ERC721ABI;
     const contract_address = nftContracts[args]
-   
     const provider = new ethers.BrowserProvider(window.ethereum);
     const signer = await provider.getSigner();
     const contract = new ethers.Contract(contract_address,abi,signer);
     const maxMintId = await contract.maxMintId();
     const nextMintId = await contract.nextMintId();
-
     const number = (parseInt(maxMintId)-parseInt(nextMintId)).toString()
-    
     setNumber(number)
-   
+    
 
   } catch (error) {
 
@@ -168,7 +179,21 @@ function NftSend(){
    
   }
 
+  const getTokenUri = async ()=>{
+    
+    try {
+      const response = await fetch("https://ipfs.io/ipfs/QmdvdVhJhVRdoApEmAy6A5AsihrVi3EN8rxNbxsawhzpt7").then(data1=>console.log(data1))
+      if (!response.ok) {
+        throw new Error("Failed to fetch the IPFS image.");
+      }
+      const blob = await response.blob();
+      
+      
+    } catch (error) {
+      console.error(error);
+    }
 
+  }
 
   const mint = async ()=>{
 
@@ -190,17 +215,18 @@ function NftSend(){
       {value:gas})
       
       ).wait()
-      
-      tx.transactionHash?setError("minted"):setError("minting")
+      let onftTokenId = await provider.getTransaction(tx.transactionHash)
+      console.log(` ONFT nftId: ${parseInt(Number(onftTokenId.logs[0].topics[3]))}`)
+
+      tx.transactionHash?setError("minted"):setError("Minted")
      
     } catch (error) {
      
-      setError(error.toString().split('\n')[0])
+      setError((error.reason))
 
     }
    
   }
-
 
 const send = async ()=>{
 
@@ -251,11 +277,19 @@ const send = async ()=>{
    
 
       setError(message.status)
+
+      
     
       })
    
   } catch (error) {
-  setError(error.toString().split('\n')[0])
+    for (const key in error) {
+      if (error.hasOwnProperty(key)) {
+        const value = error[key];
+        console.log(`Key: ${key}, Value: ${value}`);
+      }
+    }
+  setError(error.reason)
  
   }
 
@@ -268,7 +302,7 @@ const send = async ()=>{
       <div>
 
       <div class="chain-switch"> 
-        <input type="button" value="Mainnet" class="button1" disabled style={{backgroundColor:colorset}} onClick={mainNetoption}/>
+        <input type="button" value="Mainnet" class="button1" disabled  onClick={mainNetoption}/>
         <input type="button" value="Testnet" class="button2" onClick={testNetoption}/>
       </div>
       
@@ -278,7 +312,7 @@ const send = async ()=>{
           <div class="claim-heading">
         <div>
       
-        <h3 style={{color:"white",borderBottom:"2px solid #e10bc1", marginBottom:'10px', margin:'auto',paddingBottom:'10px'}} >Send Tokens</h3>
+        <h3 style={{color:"white",borderBottom:"2px solid #e10bc1", marginBottom:'10px', margin:'auto',paddingBottom:'10px'}} >Send NFTs</h3>
       
         </div>
            
@@ -302,7 +336,7 @@ const send = async ()=>{
             {isOpen1 && (
               <ul className="dropdown-options" style={{overflow:'visible'}}>
                 {options.map((option) => (
-                  <li key={option.id} onClick={() => handleOptionSelect1(option)}>
+                  <li key={option.id} style={{border:"1px solid pink"}} onClick={() => handleOptionSelect1(option)}>
                     <img src={option.imageSrc} alt={option.name} />
                     <span>{option.name}</span>
                   </li>
@@ -312,7 +346,11 @@ const send = async ()=>{
           </div>
       
               </div>
-        
+              <div style={{height:"50px",marginLeft:"20px"}}>
+                
+                <img src="Changechain.png" alt="ChangeChain" style={{width:60,height:30 , filter: "invert(1)",marginTop:10, cursor:'pointer'}} onClick={()=> { selectedOption2 ? changeChain(selectedOption2.name):setError("Select Both Option Fields")}} />
+
+              </div>
               <div class="tochain">
               <div className="dropdown-container">
             <button className="dropdown-button" onClick={toggleDropdown2}>
@@ -326,9 +364,9 @@ const send = async ()=>{
               )}
             </button>
             {isOpen2 && (
-              <ul className="dropdown-options">
-                {options.map((option) => (
-                  <li key={option.id} onClick={() => handleOptionSelect2(option)}>
+              <ul className="dropdown-options" >
+                {options2.map((option) => (
+                  <li key={option.id} style={{border:"1px solid pink",}} onClick={() => handleOptionSelect2(option)}>
                     <img src={option.imageSrc} alt={option.name} />
                     <span>{option.name}</span>
                   </li>
@@ -361,15 +399,17 @@ const send = async ()=>{
         </div>
         <div class="button" >
           {/* <Link to="/mint" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",color:"white",backgroundColor:"#e10bc1",padding:6,border: "2px solid #e10bc1",borderRadius:5}} disabled>Mint</Link> */}
-          <button style={{width:"100%", background:"none",textDecoration:"none",color:"white",backgroundColor:"#e10bc1",padding:6,border: "2px solid #e10bc1",borderRadius:5}} onClick={mint}>Mint</button>
+          <img src="https://ipfs.io/ipfs/QmdvdVhJhVRdoApEmAy6A5AsihrVi3EN8rxNbxsawhzpt7" style={{width:"100px","height":"100px",marginLeft:"10px",marginBottom:"10px",border:"2px solid pink"}} alt="" />
+          <button style={{width:"auto", background:"none",textDecoration:"none",color:"white",backgroundColor:"#e10bc1",padding:6,border: "2px solid #e10bc1",borderRadius:5}} onClick={mint}>Mint</button>
           <p style={{color:"whitesmoke"}}>{number?number:"Not Avaialble"}/1000</p>
            </div>
- 
+           
       </div>
       
       
     
       <PopupMessage error={errorMessage} />
+      <Footer/>
           </div>
         
       

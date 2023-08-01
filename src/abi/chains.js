@@ -39,7 +39,7 @@ export const chains = {
         nativeCurrency: { name: "ETH", decimals: 18, symbol: "ETH" },
         blockExplorerUrls: ['https://blockscout.scroll.io'],
         iconUrls: ['']
-      },"Base":{
+      },"Base-testnet":{
         chainId: "0x14A33", //"0x14A33":"Base"
         rpcUrls: ['https://goerli.base.org'],
         chainName: "Base",
@@ -88,7 +88,30 @@ export const chains = {
         nativeCurrency: { name: "ETH", decimals: 18, symbol: "ETH" },
         blockExplorerUrls: ['https://goerli.explorer.zksync.io'],
         iconUrls: ['']
+      },"Sepolia":{
+        chainId: "0xaa36a7", //"0x118":"Zksync-Testnet"
+        rpcUrls: ['https://sepolia.infura.io/v3/'],
+        chainName: "Sepolia",
+        nativeCurrency: { name: "ETH", decimals: 18, symbol: "ETH" },
+        blockExplorerUrls: ['https://sepolia.etherscan.io'],
+        iconUrls: ['']
+      },"Optimism-testnet":{
+        chainId: "0x1a4", //"0x118":"Zksync-Testnet"
+        rpcUrls: ['https://optimism-goerli.publicnode.com'],
+        chainName: "Optimism Goerli",
+        nativeCurrency: { name: "ETH", decimals: 18, symbol: "ETH" },
+        blockExplorerUrls: ['https://optimism.io'],
+        iconUrls: ['']
+      },"Arbitrum-testnet":{
+        chainId: "0x66eed", //"0x118":"Zksync-Testnet"
+        rpcUrls: ['https://arbitrum-goerli.publicnode.com	'],
+        chainName: "Arbitrum Goerli",
+        nativeCurrency: { name: "ETH", decimals: 18, symbol: "ETH" },
+        blockExplorerUrls: ['https://goerli.arbiscan.io/'],
+        iconUrls: ['']
       },
+
+
 
 
 // Mainnet chains
@@ -176,15 +199,18 @@ export const network = {
   "0xFA2":"Fantom-testnet",
   "0x507":"Moonbase-alpha",
   "0xA869":"Fuji",
-  "0x1389":"Mantle",
+
   "0x5":"Goerli",
   "0x61":"Bsc-testnet",
   "0x13881":"Mumbai",
   "0x82750":"Scroll",
-  "0x14A33":"Base",
-  "0xA704":"Linea",
+  "0x14A33":"Base-testnet",
+  "0xE704":"Linea-testnet",
   "0x58A":"Zkevm-testnet",
   "0xAA36A7" : "Sepolia",
+  "0x1389" : "Mantle-testnet",
+  "":"Arbitrum-testnet",
+  "0x1A4":"Optimism-testnet",
 
   // MAinnets
   "0x1":"Ethereum",
@@ -215,7 +241,7 @@ export const endpointContracts = {
   "Bsc-testnet": "0x6Fcb97553D41516Cb228ac03FdC8B9a0a9df04A1",
   "Fuji": "0x93f54D755A063cE7bB9e6Ac47Eccc8e33411d706",
   "Mumbai": "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
-  "Arbitrum-goerli": "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
+  "Arbitrum-testnet": "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
   "Optimism-goerli": "0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1",
   "Fantom-testnet": "0x7dcAD72640F835B0FA36EFD3D6d3ec902C7E5acf",
   "Meter-testnet": "0x3De2f3D1Ac59F18159ebCB422322Cb209BA96aAD",
@@ -225,22 +251,26 @@ export const endpointContracts = {
   "Linea-testnet"         : "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
   "Base-testnet"           : "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
   "Sepolia"       : "0xae92d5aD7583AD66E49A0c67BAd18F6ba52dDDc1",
-  "Moonbeam-alpha": "0xb23b28012ee92E8dE39DEb57Af31722223034747"
+  "Moonbeam-alpha": "0xb23b28012ee92E8dE39DEb57Af31722223034747",
+  "Mantle-testnet":"0x2cA20802fd1Fd9649bA8Aa7E50F0C82b479f35fe"
 }
 
 export const tokenContracts = {
   "Goerli":"0x1392c0654fe80bc8907AB4449f736757d088f150",
   "Sepolia":"0xcAE41c8bc205760c4Ec40Be4E6558F886aa14321",
-  "Base-testnet":"",
+  "Base-testnet":"0x2Dee1be6401fDf69c4e6E81E1084c5b60A522b63",
   "Scroll":"",
   "Moonbeam-alpha":"",
   "Fantom-testnet":"",
-  "Linea-testnet":"",
+  "Linea-testnet":"0x2D489193a9D52E984f983474fE868CCdB0647219",
   "Zkevm-testnet":"",
   "Mumbai":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
-  "Bsc-testnet":"",
+  "Bsc-testnet":"0x0b8226e3cC0c382631FC7e30D9929fa8bad3Ede4",
   "Zksync-testnet":"",
   "Fuji":"",
+  "Mantle-testnet":"0x6b63b9e6e2984C5365E90Af5Fc09A208468d370E",
+  "Optimism-testnet":"0x28EA9313c0074620345F819e4aB08d561628cA94",
+  "Arbitrum-testnet":"0x1392c0654fe80bc8907AB4449f736757d088f150",
   
   // MAinnets
   "Ethereum":"",
@@ -261,18 +291,19 @@ export const tokenContracts = {
 export const nftContracts = {
   "Goerli":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Sepolia":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
-  "Base-testnet":"",
+  "Base-testnet":"0xA129eA27A62783550c113D38eD4abC72347ADB1C",
   "Scroll-testnet":"",
   "Moonbeam-alpha":"",
   "Fantom-testnet":"",
-  "Linea-testnet":"",
+  "Linea-testnet":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Zkevm-testnet":"",
   "Mumbai":"0xbcFF3e7AB2641A4751DFD4FdD9c330E8B261D8C7",
-  "Bsc-testnet":"",
+  "Bsc-testnet":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Zksync-testnet":"",
   "Fuji":"",
-  "arbitrum-goerli":"",
-  "optimism-goerli":"",
+  "Arbitrum-testnet":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
+  "Optimism-testnet":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
+  "Mantle-testnet":"0x79FbAa67A7E8f59356e5CED082DCd93769F3B8F0",
   
   // MAinnets
   "Ethereum":"",
@@ -294,19 +325,20 @@ export const nftContracts = {
 
 export const tokenClaim = {
   "Goerli":"0x102b91388712c45937d25691BbB048A192419020",
-  "Sepolia":"",
+  "Sepolia":"0xb5715948b5dBf8e5750f65a4C8928925B3DF4938",
   "Base-testnet":"",
   "Scroll-testnet":"",
   "Moonbeam-alpha":"",
   "Fantom-testnet":"",
-  "Linea-testnet":"",
+  "Linea-testnet":"0xcAE41c8bc205760c4Ec40Be4E6558F886aa14321",
   "Zkevm-testnet":"",
-  "Mumbai":"",
-  "Bsc-testnet":"",
+  "Mumbai":"0x79fe3bF6E6906df1E03BCD59F864C79e5Ca34214",
+  "Bsc-testnet":"0x89D7c46a1C302F9303Cc0A0BC02239beaB6DD106",
   "Zksync-testnet":"",
   "Fuji":"",
-  "arbitrum-goerli":"",
-  "optimism-goerli":"",
+  "Arbitrum-testnet":"0x89D7c46a1C302F9303Cc0A0BC02239beaB6DD106",
+  "Optimism-testnet":"0x3cB317cdBC4b36EEf3c380C5D550CbD990b4753D",
+  "Mantle-testnet":"0xcAE41c8bc205760c4Ec40Be4E6558F886aa14321",
   
   // MAinnets
   "Ethereum":"",
@@ -331,8 +363,8 @@ export const chainIds = {
   "Bsc-testnet":      10102,
   "Fuji":             10106,
   "Mumbai":           10109,
-  "Arbitrum-goerli":  10143,
-  "Optimism-goerli":  10132,
+  "Arbitrum-testnet":  10143,
+  "Optimism-testnet":  10132,
   "Fantom-testnet":   10112,
   "Meter-testnet":    10156,
   "Zksync-testnet":   10165,
@@ -342,6 +374,7 @@ export const chainIds = {
   "Zkevm-testnet"  :  10158,
   "Base-testnet"   :  10160,
   "Moonbeam-alpha" :  10126,
+  "Mantle-testnet": 10181,
 
   // MAinnets 
 

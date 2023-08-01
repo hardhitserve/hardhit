@@ -18,6 +18,11 @@ function Header(){
 
   const [error,setError] = useState('')
 
+  const [color1,setColor1] = useState("")
+  const [color2,setColor2] = useState("")
+  const [color3,setColor3] = useState("")
+  const [color4,setColor4] = useState("")
+
   const provider = window.ethereum
 
   useEffect(
@@ -73,7 +78,11 @@ function Header(){
     }
   )
  
-
+const changecolor =(args)=>{
+  
+  
+  
+}
 
 window.ethereum.on('chainChanged',async ()=>{  
 
@@ -137,12 +146,10 @@ try {
 
 
 
-
-
  }
 
 return ( 
-<div>
+<div style={{ backgroundColor: "#0c0309"}}>
 <header>
     <div class="container">
       <div class="logo-container">
@@ -151,11 +158,10 @@ return (
       </div>
       <nav class="navigation">
         <ul>
-          <li><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}}>Home</Link></li>
-          <li><Link to="/nfts" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}}>NFT</Link></li>
-          <li><Link to="/dropdown" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}}>Tokens</Link></li>
-
-          <li><Link to="/gas" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}}>GAS</Link></li>
+          <li><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}} onClick={changecolor(1)}>Home</Link></li>
+          <li><Link to="/nfts" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `2px solid ${color2}`}} onClick={changecolor(2)}>NFT</Link></li>
+          <li><Link to="/dropdown" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}} onClick={changecolor(3)}>Tokens</Link></li>
+          <li><Link to="/gas" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}} onClick={changecolor(4)}>GAS</Link></li>
 
         </ul>
       </nav>

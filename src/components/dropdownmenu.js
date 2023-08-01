@@ -6,8 +6,9 @@ import { tokenContracts } from '../abi/chains';
 
 import { waitForMessageReceived } from '@layerzerolabs/scan-client';
 import { abi, claimAbi } from '../abi/abi';
-import { optionsMainnet,optionsTestnet } from '../abi/chainoptions';
+import { optionsMainnet,optionsTestnet ,presentTestnet,testeObject,allowedChains} from '../abi/chainoptions';
 import PopupMessage from './popup';
+import Footer from './footer';
 
 const DropdownMenu = () => {
 
@@ -17,11 +18,11 @@ const DropdownMenu = () => {
   const [selectedOption2, setSelectedOption2] = useState(null); 
   const [address, setAddress] = useState("");
   const [ qty, setQty] = useState('');
-  const [options,setOption] = useState(optionsTestnet);
+  const [options,setOption] = useState(presentTestnet);
   const [errorMessage,setError] = useState("");
   const [networkselected,setNetworkSet] = useState('')
   const [balanceOfaccount, setbalance] = useState('')
-
+  const [options2,setOption2] = useState(null);
   const provider = window.ethereum
 
   useEffect(
@@ -133,6 +134,17 @@ const DropdownMenu = () => {
     changeChain(option.name)
     setSelectedOption1(option);
     setIsOpen1(false);
+
+    let array = allowedChains[option.name]
+    console.log(array.length)
+    let testObject = [];
+  
+     for(let i=0;i<array.length;i++){
+      testObject[i]=(testeObject[array[i]])
+      console.log(testObject)
+     }
+    
+    setOption2(testObject)
   };
 
   const handleOptionSelect2 = (option) => {
@@ -281,7 +293,7 @@ const send = async ()=>{
 
   } catch (error) {
     
-    setError(error.toString().split('\n')[0])
+    setError(error.reason)
   
   }
 
@@ -326,7 +338,7 @@ const send = async ()=>{
       {isOpen1 && (
         <ul className="dropdown-options" style={{overflow:'visible'}}>
           {options.map((option) => (
-            <li key={option.id} onClick={() => handleOptionSelect1(option)}>
+            <li key={option.id} style={{border:"1px solid pink"}} onClick={() => handleOptionSelect1(option)}>
               <img src={option.imageSrc} alt={option.name} />
               <span>{option.name}</span>
             </li>
@@ -351,8 +363,8 @@ const send = async ()=>{
       </button>
       {isOpen2 && (
         <ul className="dropdown-options">
-          {options.map((option) => (
-            <li key={option.id} onClick={() => handleOptionSelect2(option)}>
+          {options2.map((option) => (
+            <li key={option.id} style={{border:"1px solid pink"}} onClick={() => handleOptionSelect2(option)}>
               <img src={option.imageSrc} alt={option.name} />
               <span>{option.name}</span>
             </li>
@@ -382,9 +394,6 @@ const send = async ()=>{
 
 </div>
   
-
-     
-      
     </div>
   </div>
   <div class="button">
@@ -396,6 +405,7 @@ const send = async ()=>{
 
 
 <PopupMessage error={errorMessage}/>
+<Footer/>
 
     </div>
   );
