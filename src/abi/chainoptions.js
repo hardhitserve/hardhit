@@ -220,7 +220,7 @@ export const optionsTestnet = [
     "Bsc-testnet":["Bsc-testnet","Mumbai","Linea-testnet","Mantle-testnet","Sepolia", "Goerli"],
     "Linea-testnet":["Bsc-testnet","Mumbai","Sepolia", "Goerli"],
     "Mantle-testnet":["Goerli","Sepolia"],
-    "Sepolia":["Bsc-testnet","Mumbai","Base-testnet","Linea-testnet","Mantle-testnet", "Goerli","Optimism-testnet","Arbitrm-testnet"],
+    "Sepolia":["Bsc-testnet","Mumbai","Base-testnet","Linea-testnet","Mantle-testnet","Goerli","Optimism-testnet","Arbitrum-testnet"],
     "Base-testnet":["Goerli","Sepolia"],
     "Optimism-testnet":["Bsc-testnet","Mumbai","Sepolia","Goerli","Arbitrum-testnet"],
     "Arbitrum-testnet":["Bsc-testnet","Mumbai","Sepolia","Optimism-testnet","Goerli"]

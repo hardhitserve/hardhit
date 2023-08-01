@@ -147,6 +147,8 @@ function NftSend(){
      }
     
     setOption2(testObject)
+
+    console.log(testObject)
   };
 
   const handleOptionSelect2 = (option) => {
