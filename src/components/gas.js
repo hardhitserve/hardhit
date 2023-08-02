@@ -161,7 +161,7 @@ const send = async ()=>{
           remoteChainId,                 // remote LayerZero chainId
           ethers.ZeroAddress ,
           adapterParams,                     // amount of tokens to send (in wei)
-          { value:gas}
+          { value:gas*(ethers.toBigInt(2))}
       )
       
      ).wait()
