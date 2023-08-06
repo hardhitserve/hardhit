@@ -165,7 +165,7 @@ export const chains = {
         nativeCurrency: { name: "ETH", decimals: 18, symbol: "ETH" },
         blockExplorerUrls: [''],
         iconUrls: ['https://zkevm.polygonscan.com']
-      },"Avalanche ":{
+      },"Avalanche":{
         chainId: "0xa86a", //"0x118":"Zksync-Testnet"
         rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
         chainName: "Avalanche",
@@ -186,12 +186,15 @@ export const chains = {
         nativeCurrency: { name: "ETH", decimals: 18, symbol: "ETH" },
         blockExplorerUrls: ['https://optimistic.etherscan.io'],
         iconUrls: ['']
+      }, "Core":{
+        chainId: "0x45c", //"0x118":"Zksync-Testnet"
+        rpcUrls: ['https://rpc.coredao.org'],
+        chainName: "Core DAO",
+        nativeCurrency: { name: "CORE", decimals: 18, symbol: "CORE" },
+        blockExplorerUrls: ['https://scan.coredao.org'],
+        iconUrls: ['']
       },
 
-    
-
-
-   
 }
 
 export const network = {
@@ -209,22 +212,23 @@ export const network = {
   "0x58A":"Zkevm-testnet",
   "0xAA36A7" : "Sepolia",
   "0x1389" : "Mantle-testnet",
-  "":"Arbitrum-testnet",
+  "0x66EED":"Arbitrum-testnet",
   "0x1A4":"Optimism-testnet",
 
   // MAinnets
   "0x1":"Ethereum",
   "0x38":"Bsc",
   "0x89":"Polygon",
-  "0xfa":"Fantom",
+  "0xFA":"Fantom",
   "0x504":"Moonbeam",
   "0x144":"Zksync",
-  "0x44d":"ZkEVM",
+  "0x44D":"ZkEVM",
   "0x000A":"Optimism",
   "0xA4B1":"Arbitrum",
   "0xA86A":"Avalanche",
-  "0xa4b1": "Arbitrum",
-  "0xa"   :"Optimism"
+  "0xA4b1": "Arbitrum",
+  "0xA"   :"Optimism",
+  "0x45C":"Core"
 
 }
 
@@ -236,6 +240,13 @@ export const endpointContracts = {
   "Arbitrum": "0x3c2269811836af69497E5F486A85D7316753cf62",
   "Optimism": "0x3c2269811836af69497E5F486A85D7316753cf62",
   "Fantom": "0xb6319cC6c8c27A8F5dAF0dD3DF91EA35C4720dd7",
+  "Base" :"0xb6319cC6c8c27A8F5dAF0dD3DF91EA35C4720dd7",
+  "zkSync":"0x9b896c0e23220469C7AE69cb4BbAE391eAa4C8da",
+  "zkEvm":"0x9740FF91F1985D8d2B71494aE1A2f723bb3Ed9E4",
+  "Moonbeam":"0x9740FF91F1985D8d2B71494aE1A2f723bb3Ed9E4",
+  "Mantle":"0xb6319cC6c8c27A8F5dAF0dD3DF91EA35C4720dd7",
+  "Moonriver":"0x7004396C99D5690da76A7C59057C5f3A53e01704",
+  "Core":"0x9740FF91F1985D8d2B71494aE1A2f723bb3Ed9E4",
 
   "Goerli": "0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23",
   "Bsc-testnet": "0x6Fcb97553D41516Cb228ac03FdC8B9a0a9df04A1",
@@ -274,18 +285,19 @@ export const tokenContracts = {
   
   // MAinnets
   "Ethereum":"",
-  "Bsc":"",
-  "Polygon":"",
-  "Fantom":"",
-  "Moonbeam":"",
+  "Bsc":"0xB194174A33398A3db3972c06a6AFc81f479C41e5",
+  "Polygon":"0xB194174A33398A3db3972c06a6AFc81f479C41e5",
+  "Fantom":"0xF20c24cF9AA452c4f29CCE38F5EaE0bc9Ae8AaC3",
+  "Moonbeam":"0x78d43c740c3cD978b708C5104231A236B72A0087",
   "Zksync":"",
   "ZkEVM":"",
   "Optimism":"",
   "Arbitrum":"",
-  "Avalanche":"",
+  "Avalanche":"0xF20c24cF9AA452c4f29CCE38F5EaE0bc9Ae8AaC3",
   "Linea":"",
   "Base":"",
-  "Mantle":""
+  "Mantle":"",
+  "Core":"0x79FbAa67A7E8f59356e5CED082DCd93769F3B8F0"
 }
 
 export const nftContracts = {
@@ -307,18 +319,20 @@ export const nftContracts = {
   
   // MAinnets
   "Ethereum":"",
-  "Bsc":"",
-  "Polygon":"",
-  "Fantom":"",
-  "Moonbeam":"",
+  "Bsc":"0x6b63b9e6e2984C5365E90Af5Fc09A208468d370E",
+  "Polygon":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
+  "Fantom":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
+  "Moonbeam":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Zksync":"",
   "ZkEVM":"",
-  "Optimism":"",
-  "Arbitrum":"",
-  "Avalanche":"",
+  "Optimism":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
+  "Arbitrum":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
+  "Avalanche":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Linea":"",
   "Base":"",
-  "Mantle":""
+  "Mantle":"",
+  "Core":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd"
+  
 }
 
 
@@ -342,18 +356,19 @@ export const tokenClaim = {
   
   // MAinnets
   "Ethereum":"",
-  "Bsc":"",
-  "Polygon":"",
-  "Fantom":"",
-  "Moonbeam":"",
+  "Bsc":"0xe29A61754f9dAA767fD03987652A03B583e19fa2",
+  "Polygon":"0xe29A61754f9dAA767fD03987652A03B583e19fa2",
+  "Fantom":"0x9f19006FECfE418De493Daa918c50645925EB214",
+  "Moonbeam":"0xB194174A33398A3db3972c06a6AFc81f479C41e5",
   "Zksync":"",
   "ZkEVM":"",
   "Optimism":"",
   "Arbitrum":"",
-  "Avalanche":"",
+  "Avalanche":"0x9f19006FECfE418De493Daa918c50645925EB214",
   "Linea":"",
   "Base":"",
-  "Mantle":""
+  "Mantle":"",
+  "Core":"0x7Be8D8116De8d57D69BedCBFF5Cf0d4c9ae0A8Ed"
 }
 
 //0x102b91388712c45937d25691BbB048A192419020
@@ -388,9 +403,12 @@ export const chainIds = {
     "ZkEVM":158,
     "Optimism":111,
     "Arbitrum":175,
-    "Avalanche":"",
+    "Avalanche":106,
     "Linea":183,
     "Mantle":181,
-    "Base":184
+    "Base":184,
+  "Moonriver":        167,
+  "Core" :            153,
+
 
 }

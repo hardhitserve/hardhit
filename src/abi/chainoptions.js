@@ -151,76 +151,16 @@ export const optionsTestnet = [
     },
   }
 
-  export const optionsMainnet = [
-    {
-      id: 1,
-      name: 'Ethereum',
-      imageSrc: './blockchainlogos/ethereum.png', // Replace with your image file path
-      color:'pink'
-    },
-    {
-      id: 2,
-      name: 'Bsc',
-      imageSrc: './blockchainlogos/binance.png', // Replace with your image file path
-    },
-    {
-        id: 3,
-        name: 'Polygon',
-        imageSrc: './blockchainlogos/polygonmatic.png', // Replace with your image file path
-      },
-      {
-        id: 4,
-        name: 'Avalanche',
-        imageSrc: './blockchainlogos/avax.png', // Replace with your image file path
-      }, {
-        id: 5,
-        name: 'Fantom',
-        imageSrc: './blockchainlogos/fantom.png', // Replace with your image file path
-      },
-      {
-        id: 6,
-        name: 'Base',
-        imageSrc: './blockchainlogos/base.png', // Replace with your image file path
-      }, {
-        id: 7,
-        name: 'Linea',
-        imageSrc: './blockchainlogos/linea.png', // Replace with your image file path
-      },
-      {
-        id: 8,
-        name: 'Zkevm',
-        imageSrc: './blockchainlogos/polygonmatic.png', // Replace with your image file path
-      }, {
-        id: 9,
-        name: 'Moonbeam',
-        imageSrc: './blockchainlogos/moonbeam.png', // Replace with your image file path
-      }, {
-        id: 10,
-        name: 'Scroll',
-        imageSrc: './blockchainlogos/scroll.png', // Replace with your image file path
-      },{
-        id: 11,
-        name: 'Zksync',
-        imageSrc: './blockchainlogos/zksync.png', // Replace with your image file path
-      },{
-        id: 12,
-        name: 'Arbitrum',
-        imageSrc: './blockchainlogos/zksync.png', // Replace with your image file path
-      },{
-        id: 13,
-        name: 'Optimism',
-        imageSrc: './blockchainlogos/zksync.png', // Replace with your image file path
-      },
-  ];
+
 
  // const networks =["goerli","sepolia","arbitrum-goerli","optimism-goerli","scroll-testnet","base-testnet","linea-testnet","fantom-testnet","bsc-testnet","fuji","mumbai","moonbeam-alpha"]
-  export const allowedChains = {
+  export const testnet_routes = {
     "Goerli":["Bsc-testnet","Mumbai","Base-testnet","Linea-testnet","Mantle-testnet","Sepolia","Optimism-testnet"],
-    "Mumbai":["Bsc-testnet","Base-testnet","Linea-testnet","Mantle-testnet","Sepolia", "Goerli","Optimism-testnet"],
-    "Bsc-testnet":["Bsc-testnet","Mumbai","Linea-testnet","Mantle-testnet","Sepolia", "Goerli"],
+    "Mumbai":["Bsc-testnet","Base-testnet","Linea-testnet","Sepolia", "Goerli","Optimism-testnet"],
+    "Bsc-testnet":["Bsc-testnet","Mumbai","Linea-testnet","Sepolia", "Goerli"],
     "Linea-testnet":["Bsc-testnet","Mumbai","Sepolia", "Goerli"],
-    "Mantle-testnet":["Goerli","Sepolia"],
-    "Sepolia":["Bsc-testnet","Mumbai","Base-testnet","Linea-testnet","Mantle-testnet","Goerli","Optimism-testnet","Arbitrum-testnet"],
+    "Mantle-testnet":["Goerli",],
+    "Sepolia":["Bsc-testnet","Mumbai","Base-testnet","Linea-testnet","Goerli","Optimism-testnet","Arbitrum-testnet"],
     "Base-testnet":["Goerli","Sepolia"],
     "Optimism-testnet":["Bsc-testnet","Mumbai","Sepolia","Goerli","Arbitrum-testnet"],
     "Arbitrum-testnet":["Bsc-testnet","Mumbai","Sepolia","Optimism-testnet","Goerli"]

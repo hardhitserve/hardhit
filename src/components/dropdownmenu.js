@@ -4,9 +4,12 @@ import { ethers } from 'ethers';
 import { chainIds,chains, tokenClaim,network } from '../abi/chains';
 import { tokenContracts } from '../abi/chains';
 
-import { waitForMessageReceived } from '@layerzerolabs/scan-client';
+import { waitForMessageReceived ,getMessagesBySrcTxHash} from '@layerzerolabs/scan-client';
 import { abi, claimAbi } from '../abi/abi';
-import { optionsMainnet,optionsTestnet ,presentTestnet,testeObject,allowedChains} from '../abi/chainoptions';
+import { optionsTestnet ,presentTestnet,testeObject,testnet_routes} from '../abi/chainoptions';
+
+import { present_mainnet, mainnet_present_object,mainnetRoutes } 
+  from '../abi/mainnetcontracts';
 import PopupMessage from './popup';
 import Footer from './footer';
 
@@ -18,11 +21,15 @@ const DropdownMenu = () => {
   const [selectedOption2, setSelectedOption2] = useState(null); 
   const [address, setAddress] = useState("");
   const [ qty, setQty] = useState('');
-  const [options,setOption] = useState(presentTestnet);
+  const [options,setOption] = useState(present_mainnet);
   const [errorMessage,setError] = useState("");
   const [networkselected,setNetworkSet] = useState('')
   const [balanceOfaccount, setbalance] = useState('')
   const [options2,setOption2] = useState(null);
+  const [color,setColor] = useState("white")
+  const [colorback,setColorBack]  = useState("grey")
+  const [routes, setRoutes] = useState(mainnetRoutes)
+  const [object,setObject] = useState(mainnet_present_object)
   const provider = window.ethereum
 
   useEffect(
@@ -42,7 +49,7 @@ const DropdownMenu = () => {
             });
           
           setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
-           console.log(currentChainId)
+           
           } else {
      
             const currentChainId = await window.ethereum.request({
@@ -87,7 +94,7 @@ const DropdownMenu = () => {
            ethereum.request({
            method: 'wallet_addEthereumChain',
            params: [chains[args]],
-           }).then(response => console.log(response))
+           }).then(response => console.log())
          }
          }
  
@@ -116,41 +123,57 @@ const DropdownMenu = () => {
   }
   
  const mainNetoption  = () =>{
-  setOption(optionsMainnet);
+  setOption(present_mainnet);
+  setRoutes(mainnetRoutes)
+  setObject(mainnet_present_object);
+  setColor("white")
+  setColorBack("grey")
  }
  const testNetoption  = () =>{
-  setOption(optionsTestnet);
+  setOption(presentTestnet);
+  setRoutes(testnet_routes);
+  setObject(testeObject);
+  setColor("grey")
+  setColorBack("white")
  }
 
   const toggleDropdown1 = () => {
     setIsOpen1(!isOpen1);
   };
   const toggleDropdown2 = () => {
-    setIsOpen2(!isOpen2);
+    if(selectedOption1){
+      setIsOpen2(!isOpen2);
+    } else {
+      setError("Select option 1")
+    }
   };
 
   const handleOptionSelect1 = (option) => {
     
-    changeChain(option.name)
-    setSelectedOption1(option);
-    setIsOpen1(false);
-
-    let array = allowedChains[option.name]
-    console.log(array.length)
-    let testObject = [];
-  
-     for(let i=0;i<array.length;i++){
-      testObject[i]=(testeObject[array[i]])
-      console.log(testObject)
-     }
+    try {
+      changeChain(option.name)
+      setSelectedOption1(option);
+      setIsOpen1(false);
+      let array = routes[option.name]
+      let options_routes2 = [];
     
-    setOption2(testObject)
+      for(let i=0;i<array.length;i++){
+        options_routes2[i]=(object[array[i]])
+       }
+      
+      setOption2(options_routes2)
+    } catch (error) {
+      setError(error.reason)
+    }
   };
 
   const handleOptionSelect2 = (option) => {
-    
-    setSelectedOption2(option);
-    setIsOpen2(false);
+    try {
+      setSelectedOption2(option);
+      setIsOpen2(false);
+    } catch (error) {
+      setError(error.reason)
+    }
   };
 
 
@@ -165,14 +188,11 @@ const claim = async ()=>{
   const currentChainId = await window.ethereum.request({
     method: 'eth_chainId',
   });
-  console.log(currentChainId)
- 
-console.log(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
+
   const contract_address = await tokenClaim[network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]];
-  console.log(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
   const signer = await provider.getSigner();
 
-  console.log(signer)
+
 
 
   const contract = new ethers.Contract(contract_address,Abi,signer);
@@ -184,17 +204,17 @@ console.log(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
 
    ).wait()
 
-console.log(tx)
+
 
   } catch (error) {
-    console.log(error.message)
+    
     setError("Tokens Claim is only once per 24hrs")
   
   }
 }
 
 const balance =async(argsnetwork)=>{
-  console.log(argsnetwork)
+ 
   try {
   const contract_address = tokenContracts[argsnetwork];
 
@@ -203,8 +223,6 @@ const balance =async(argsnetwork)=>{
   const provider = new ethers.BrowserProvider(window.ethereum);
 
   const signer = await provider.getSigner();
-
-  console.log(signer)
 
   const contract = new ethers.Contract(contract_address,Abi,signer);
 
@@ -225,7 +243,7 @@ const balance =async(argsnetwork)=>{
 
   } catch (error) {
     
-   console.log(error)
+   
   
   }
 
@@ -235,22 +253,16 @@ const balance =async(argsnetwork)=>{
 const send = async ()=>{
 
   try {
-    const contract_address = tokenContracts[selectedOption1.name];
+
+  const contract_address = tokenContracts[selectedOption1.name];
 
   const Abi = abi.abi;
 
   const provider = new ethers.BrowserProvider(window.ethereum);
 
-  
-
   const signer = await provider.getSigner();
 
-  console.log(signer)
-
-
   const contract = new ethers.Contract(contract_address,Abi,signer);
-
-  
 
   const toAddress = tokenContracts[selectedOption2.name];
 
@@ -260,16 +272,11 @@ const send = async ()=>{
 
   let adapterParams = ethers.solidityPacked(["uint16", "uint256"], [1, 250000]) // default adapterParams example
 
-
   let quantity =  ethers.parseEther(qty);
 
    let fees = await contract.estimateSendFee(remoteChainId, toAddressBytes, quantity, false, adapterParams)
 
-   console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
-
    const gas = fees[0]
-
-  console.log(address)
   
    let tx = await (
     await contract.sendFrom(
@@ -278,7 +285,7 @@ const send = async ()=>{
         toAddressBytes,                     // 'to' address to send tokens
         quantity,                           // amount of tokens to send (in wei)
         [address, ethers.ZeroAddress,'0x'],
-        { value: gas }
+        { value: gas*(ethers.toBigInt(4)/ethers.toBigInt(3)) }
     )
     
    ).wait()
@@ -286,7 +293,6 @@ const send = async ()=>{
 
    await waitForMessageReceived(chainIds[selectedOption2.name],tx.hash).then(async (message) => {
 
-    console.log(message.status)
     setError(message.status)
 
     })
@@ -304,8 +310,8 @@ const send = async ()=>{
     <div>
 
 <div class="chain-switch"> 
-  <input type="button" style={{selectedOption1}} value="Mainnet" disabled class="button1" onClick={mainNetoption}/>
-  <input type="button" value="Testnet" class="button2" onClick={testNetoption}/>
+<input type="button" style={{backgroundColor:color}} value="Mainnet" class="button1" onClick={mainNetoption} />
+        <input type="button" style={{backgroundColor:colorback}} value="Testnet" class="button2" onClick={testNetoption}/>
 </div>
 
 
@@ -332,7 +338,7 @@ const send = async ()=>{
             <span>{selectedOption1.name}</span>
           </>
         ) : (
-          <span>Select an option</span>
+          <span>From Chain</span>
         )}
       </button>
       {isOpen1 && (
@@ -348,7 +354,11 @@ const send = async ()=>{
     </div>
 
         </div>
-  
+        <div style={{height:"50px",marginLeft:"20px"}}>
+                
+                <img src="Changechain.png" alt="ChangeChain" style={{width:60,height:30 , filter: "invert(1)",marginTop:10, cursor:'pointer'}} onClick={()=> { selectedOption2 ? changeChain(selectedOption2.name):setError("Select Both Option Fields")}} />
+
+              </div>
         <div class="tochain">
         <div className="dropdown-container">
       <button className="dropdown-button" onClick={toggleDropdown2}>
@@ -358,7 +368,7 @@ const send = async ()=>{
             <span>{selectedOption2.name}</span>
           </>
         ) : (
-          <span>Select an option</span>
+          <span>To Chain</span>
         )}
       </button>
       {isOpen2 && (
@@ -398,7 +408,7 @@ const send = async ()=>{
   </div>
   <div class="button">
    <button onClick={claim}>Claim</button>
-   <p style={{color:"whitesmoke"}}>balance:{balanceOfaccount}</p>
+   <p style={{color:"whitesmoke"}}>Balance:{`${balanceOfaccount}HTT`}</p>
   </div>
 </div>
 

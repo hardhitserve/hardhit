@@ -18,10 +18,10 @@ function Header(){
 
   const [error,setError] = useState('')
 
-  const [color1,setColor1] = useState("")
-  const [color2,setColor2] = useState("")
-  const [color3,setColor3] = useState("")
-  const [color4,setColor4] = useState("")
+  const [color1,setColor1] = useState('')
+  const [color2,setColor2] = useState('')
+  const [color3,setColor3] = useState('')
+  const [color4,setColor4] = useState('')
 
   const provider = window.ethereum
 
@@ -78,11 +78,41 @@ function Header(){
     }
   )
  
-const changecolor =(args)=>{
-  
-  
-  
-}
+// const changecolor =(args)=>{
+//     let array = [1,2,3,4]
+
+//     for(let i=0;i.array.length;i++){
+//       if(args=== array[i]){
+        
+//       }
+//     }
+// }
+ 
+  const changeColor1 =()=>{
+    setColor1('#e10bc1')
+    setColor2('pink')
+    setColor3('pink')
+    setColor4('pink')
+  }
+  const changeColor2 =()=>{
+    setColor1('pink')
+    setColor2('#e10bc1')
+    setColor3('pink')
+    setColor4('pink')
+  }
+  const changeColor3 =()=>{
+    setColor1('pink')
+    setColor2('pink')
+    setColor3('#e10bc1')
+    setColor4('pink')
+  }
+  const changeColor4 =()=>{
+    setColor1('pink')
+    setColor2('pink')
+    setColor3('pink')
+    setColor4('#e10bc1')
+  }
+
 
 window.ethereum.on('chainChanged',async ()=>{  
 
@@ -158,10 +188,10 @@ return (
       </div>
       <nav class="navigation">
         <ul>
-          <li><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}} onClick={changecolor(1)}>Home</Link></li>
-          <li><Link to="/nfts" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `2px solid ${color2}`}} onClick={changecolor(2)}>NFT</Link></li>
-          <li><Link to="/dropdown" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}} onClick={changecolor(3)}>Tokens</Link></li>
-          <li><Link to="/gas" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: "2px solid pink"}} onClick={changecolor(4)}>GAS</Link></li>
+          <li onClick={e=>changeColor1()} style={{background: "none"}}><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color1}` }} >Home</Link></li>
+          <li onClick={e=>changeColor2()}><Link to="/nfts" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color2}`}}>NFT</Link></li>
+          <li onClick={e=>changeColor3()}><Link to="/dropdown" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color3} `}}>Tokens</Link></li>
+          <li onClick={e=>changeColor4()}><Link to="/gas" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color4}`}} >GAS</Link></li>
 
         </ul>
       </nav>

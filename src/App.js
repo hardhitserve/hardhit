@@ -14,7 +14,7 @@ function App() {
   
   return (
     <Router >
-    <div style={{ backgroundColor:'black',width:"100%",height:"100%", alignItems:"center"}} >
+    <div style={{ backgroundColor:'black',width:"100%",height:"100%", alignItems:"center",}} >
       
 
       <Header style={{margin:"auto",backgroundColor:'black'}}></Header>
