@@ -99,7 +99,7 @@ function Gas(){
     if(selectedOption1){
       setIsOpen2(!isOpen2);
     } else {
-      setError("Select option 1")
+      setError("Select From Chain")
     }
 
    
@@ -179,7 +179,7 @@ const send = async ()=>{
           remoteChainId,                 // remote LayerZero chainId
           ethers.ZeroAddress ,
           adapterParams,                     // amount of tokens to send (in wei)
-          { value:gas*(ethers.toBigInt(2)),gasLimit:300000}
+          { value:gas,gasLimit:300000}
       )
       
      ).wait()

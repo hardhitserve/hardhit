@@ -24,7 +24,7 @@ function App() {
         <Route path="/" element={ <HomePage />}>
           
           </Route>
-          <Route path="/dropdown" element={ <DropdownMenu />}>
+          <Route path="/tokens" element={ <DropdownMenu />}>
           
           </Route>
           <Route path="/nfts" element={ <NftSend />}>

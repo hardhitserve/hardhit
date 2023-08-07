@@ -190,7 +190,7 @@ return (
         <ul>
           <li onClick={e=>changeColor1()} style={{background: "none"}}><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color1}` }} >Home</Link></li>
           <li onClick={e=>changeColor2()}><Link to="/nfts" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color2}`}}>NFT</Link></li>
-          <li onClick={e=>changeColor3()}><Link to="/dropdown" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color3} `}}>Tokens</Link></li>
+          <li onClick={e=>changeColor3()}><Link to="/tokens" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color3} `}}>Tokens</Link></li>
           <li onClick={e=>changeColor4()}><Link to="/gas" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color4}`}} >GAS</Link></li>
 
         </ul>

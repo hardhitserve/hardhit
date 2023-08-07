@@ -8,7 +8,7 @@ import { waitForMessageReceived ,getMessagesBySrcTxHash} from '@layerzerolabs/sc
 import { abi, claimAbi } from '../abi/abi';
 import { optionsTestnet ,presentTestnet,testeObject,testnet_routes} from '../abi/chainoptions';
 
-import { present_mainnet, mainnet_present_object,mainnetRoutes } 
+import { present_Tokens_mainnet, mainnet_present_object,mainnetRoutes } 
   from '../abi/mainnetcontracts';
 import PopupMessage from './popup';
 import Footer from './footer';
@@ -21,7 +21,7 @@ const DropdownMenu = () => {
   const [selectedOption2, setSelectedOption2] = useState(null); 
   const [address, setAddress] = useState("");
   const [ qty, setQty] = useState('');
-  const [options,setOption] = useState(present_mainnet);
+  const [options,setOption] = useState(present_Tokens_mainnet);
   const [errorMessage,setError] = useState("");
   const [networkselected,setNetworkSet] = useState('')
   const [balanceOfaccount, setbalance] = useState('')
@@ -123,7 +123,7 @@ const DropdownMenu = () => {
   }
   
  const mainNetoption  = () =>{
-  setOption(present_mainnet);
+  setOption(present_Tokens_mainnet);
   setRoutes(mainnetRoutes)
   setObject(mainnet_present_object);
   setColor("white")
@@ -144,7 +144,7 @@ const DropdownMenu = () => {
     if(selectedOption1){
       setIsOpen2(!isOpen2);
     } else {
-      setError("Select option 1")
+      setError("Select From Chain")
     }
   };
 
@@ -178,22 +178,18 @@ const DropdownMenu = () => {
 
 
 const claim = async ()=>{
-  try {
-   
+  const currentChainId = await window.ethereum.request({
+    method: 'eth_chainId',
+  });
+  const contract_address = await tokenClaim[network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]];
+ if(contract_address){
 
+  try {
   const Abi = claimAbi;
 
   const provider = new ethers.BrowserProvider(window.ethereum);
 
-  const currentChainId = await window.ethereum.request({
-    method: 'eth_chainId',
-  });
-
-  const contract_address = await tokenClaim[network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]];
   const signer = await provider.getSigner();
-
-
-
 
   const contract = new ethers.Contract(contract_address,Abi,signer);
 
@@ -210,10 +206,18 @@ const claim = async ()=>{
     
     setError("Tokens Claim is only once per 24hrs")
   
+  }} else {
+    console.log("No OFT contracts found on this chain")
   }
 }
 
 const balance =async(argsnetwork)=>{
+
+  const currentChainId = await window.ethereum.request({
+    method: 'eth_chainId',
+  });
+  const contract_address = await tokenClaim[network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]];
+ if(contract_address){
  
   try {
   const contract_address = tokenContracts[argsnetwork];
@@ -239,12 +243,15 @@ const balance =async(argsnetwork)=>{
  
    const weiValue = ethers.toBigInt(tx.toString()); // 1 Ether in Wei (10^18 Wei)
    const etherValue = convertWeiToEther(weiValue);
-   setbalance(etherValue);
+   setbalance(etherValue +"HTT");
 
   } catch (error) {
     
    
   
+  }} else {
+    setbalance("Not available");
+    console.log("No OFT contracts found on this chain")
   }
 
 }
@@ -285,7 +292,7 @@ const send = async ()=>{
         toAddressBytes,                     // 'to' address to send tokens
         quantity,                           // amount of tokens to send (in wei)
         [address, ethers.ZeroAddress,'0x'],
-        { value: gas*(ethers.toBigInt(4)/ethers.toBigInt(3)) }
+        { value: gas,gasLimit:300000 }
     )
     
    ).wait()
@@ -408,7 +415,7 @@ const send = async ()=>{
   </div>
   <div class="button">
    <button onClick={claim}>Claim</button>
-   <p style={{color:"whitesmoke"}}>Balance:{`${balanceOfaccount}HTT`}</p>
+   <p style={{color:"whitesmoke"}}>Balance:{`${balanceOfaccount}`}</p>
   </div>
 </div>
 

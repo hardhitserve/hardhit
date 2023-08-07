@@ -151,7 +151,7 @@ function NftSend(){
     if(selectedOption1){
       setIsOpen2(!isOpen2);
     } else {
-      setError("Select option 1")
+      setError("Select From Chain")
     }
   };
 
@@ -271,7 +271,7 @@ const send = async ()=>{
           address,                           // amount of tokens to send (in wei)
           ethers.ZeroAddress,
           adapterParams,
-          { value: gas }
+          { value: gas,gasLimit:300000 }
     )
  
   
