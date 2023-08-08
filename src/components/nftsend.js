@@ -224,7 +224,7 @@ function NftSend(){
       ).wait()
 
       let onftTokenId = await provider.getTransaction(tx.transactionHash)
-      console.log(` ONFT nftId: ${parseInt(Number(onftTokenId.logs[0].topics[3]))}`)
+    
 
       tx.transactionHash?setError("minted"):setError("Minted")
      
@@ -303,7 +303,7 @@ const send = async ()=>{
       <div>
 
       <div class="chain-switch"> 
-      <input type="button" style={{backgroundColor:color}} value="Mainnet" class="button1" onClick={mainNetoption} onSelect={()=>console.log()}/>
+      <input type="button" style={{backgroundColor:color}} value="Mainnet" class="button1" onClick={mainNetoption} />
         <input type="button" style={{backgroundColor:colorback}} value="Testnet" class="button2" onClick={testNetoption}/>
       </div>
       

@@ -207,7 +207,7 @@ const claim = async ()=>{
     setError("Tokens Claim is only once per 24hrs")
   
   }} else {
-    console.log("No OFT contracts found on this chain")
+    setError("No OFT contracts found on this chain")
   }
 }
 
@@ -251,7 +251,7 @@ const balance =async(argsnetwork)=>{
   
   }} else {
     setbalance("Not available");
-    console.log("No OFT contracts found on this chain")
+   setError("No OFT contracts found on this chain")
   }
 
 }

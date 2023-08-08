@@ -112,7 +112,7 @@ function Gas(){
       setSelectedOption1(option);
       setIsOpen1(false);
       let array = routes[option.name]
-      console.log(array)
+     
       let options_routes2 = [];
     
       for(let i=0;i<array.length;i++){
@@ -193,8 +193,7 @@ const send = async ()=>{
         chainIds[selectedOption2.name],tx.transactionHash
       );
 
-      console.log(await messages)
-
+     
   } catch (error) {
  try {
   if((error.reason).includes("dstNativeAmt too large")){
@@ -222,7 +221,7 @@ const send = async ()=>{
       <div>
 
       <div class="chain-switch"> 
-        <input type="button" style={{backgroundColor:color}} value="Mainnet" class="button1" onClick={mainNetoption} onSelect={()=>console.log("kjnjkn")}/>
+        <input type="button" style={{backgroundColor:color}} value="Mainnet" class="button1" onClick={mainNetoption} />
         <input type="button" style={{backgroundColor:colorback}} value="Testnet" class="button2" onClick={testNetoption}/>
       </div>
       
