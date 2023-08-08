@@ -166,12 +166,10 @@ const send = async ()=>{
    
     let fees = await endpoint.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams);
 
-   
-  //  console.log(`fees[0] (wei): ${fees[0]} / (eth): ${ethers.formatEther(fees[0])}`)
 
-    const gas = ethers.parseUnits(ethers.formatEther(fees[0]).toString(),'ether')
+    
+    const gas = ethers.parseUnits((parseFloat(ethers.formatEther(fees[0]))*parseFloat(1.03)).toString(),'ether')
 
- 
     let tx = await (
   
     await contract.bridgeGas(            

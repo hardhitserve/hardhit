@@ -215,11 +215,11 @@ function NftSend(){
       const provider = new ethers.BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
       const contract = new ethers.Contract(contract_address,abi,signer);
-      const gas = ethers.parseUnits('0.01','ether')
+      const gas = ethers.parseUnits('1','wei')
 
       let tx = await( await contract.mint(
-       
-      {value:gas})
+      {value:gas}
+)
       
       ).wait()
 
