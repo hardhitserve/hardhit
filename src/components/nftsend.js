@@ -344,7 +344,7 @@ const send = async ()=>{
               )}
             </button>
             {isOpen1 && (
-              <ul className="dropdown-options" style={{overflow:'visible'}}>
+              <ul className="dropdown-options" style={{overflow:'visible',zIndex:10}}>
                 {options.map((option) => (
                   <li key={option.id} style={{border:"1px solid pink"}} onClick={() => handleOptionSelect1(option)}>
                     <img src={option.imageSrc} alt={option.name} />
