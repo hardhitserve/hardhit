@@ -193,6 +193,13 @@ export const chains = {
         nativeCurrency: { name: "CORE", decimals: 18, symbol: "CORE" },
         blockExplorerUrls: ['https://scan.coredao.org'],
         iconUrls: ['']
+      },"Base":{
+        chainId: "0x2105", //"0x118":"Zksync-Testnet"
+        rpcUrls: ['https://developer-access-mainnet.base.org'],
+        chainName: "Base Mainnet",
+        nativeCurrency: { name: "BASE", decimals: 18, symbol: "ETH" },
+        blockExplorerUrls: ['https://basescan.org'],
+        iconUrls: ['']
       },
 
 }
@@ -228,7 +235,9 @@ export const network = {
   "0xA86A":"Avalanche",
   "0xA4b1": "Arbitrum",
   "0xA"   :"Optimism",
-  "0x45C":"Core"
+  "0x45C":"Core",
+  "0x2105":"Base"
+
 
 }
 
@@ -329,7 +338,7 @@ export const nftContracts = {
   "Arbitrum":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Avalanche":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Linea":"",
-  "Base":"",
+  "Base":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Mantle":"",
   "Core":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd"
   

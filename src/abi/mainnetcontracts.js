@@ -1,14 +1,15 @@
 
 
 export const mainnetRoutes  = {
-    "Bsc":["Polygon","Avalanche","Fantom","Moonbeam","Core"],
-    "Polygon":["Bsc","Avalanche","Fantom","Moonbeam","Core"],
+    "Bsc":["Polygon","Avalanche","Fantom","Base","Moonbeam","Core"],
+    "Polygon":["Bsc","Avalanche","Fantom","Base","Moonbeam","Core"],
     "Avalanche":["Bsc","Polygon","Fantom","Moonbeam","Core"],
     "Fantom":["Bsc","Polygon","Avalanche","Moonbeam","Core"],
-    "Optimism":["Bsc","Polygon","Avalanche","Fantom","Arbitrum","Moonbeam"],
+    "Optimism":["Bsc","Polygon","Base","Avalanche","Fantom","Arbitrum","Moonbeam"],
     "Arbitrum":["Bsc","Polygon","Avalanche","Fantom","Optimism","Moonbeam"],
     "Moonbeam":["Bsc","Polygon","Avalanche","Fantom"],
     "Core":["Bsc","Polygon"],
+    "Base":["Bsc","Polygon","Optimism"]
 }
  const optionsMainnet = [
     {
@@ -114,6 +115,11 @@ export const present_mainnet = [
           name: 'Core',
           imageSrc: './blockchainlogos/core.png', // Replace with your image file path
         },
+        {
+          id: 6,
+          name: 'Base',
+          imageSrc: './blockchainlogos/base.png', // Replace with your image file path
+        }
 
     ]
 export const  mainnet_present_object = {
@@ -155,6 +161,11 @@ export const  mainnet_present_object = {
       id:14,
       name:"Sepolia",
       imageSrc:"./blockchainlogos/ethereum.png"
+    },"Base":
+    {
+      id: 6,
+      name: 'Base',
+      imageSrc: './blockchainlogos/base.png', // Replace with your image file path
     }
   }
 
