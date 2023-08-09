@@ -1,6 +1,6 @@
-import {ethers, toBigInt} from 'ethers';
-import React, { useState } from 'react';
-import {chains,chainIds, nftContracts,endpointContracts} from '../abi/chains'
+import {ethers} from 'ethers';
+import React, { useDebugValue, useEffect, useState } from 'react';
+import {chains,chainIds, nftContracts,endpointContracts,network} from '../abi/chains'
 import {waitForMessageReceived,getMessagesBySrcTxHash} from "@layerzerolabs/scan-client"
 import { presentTestnet,testeObject,testnet_routes } from '../abi/chainoptions';
 import { present_mainnet, mainnetRoutes,mainnet_present_object } from '../abi/mainnetcontracts';
@@ -8,7 +8,9 @@ import PopupMessage from './popup';
 import { ERC721ABI ,endpointAbi} from '../abi/erc721abi';
 import Footer from './footer';
 
+
 function Gas(){
+
   document.title = "Send Native Gas cross chains | Send Native Gas";
   const [isOpen1, setIsOpen1] = useState(false);
   const [isOpen2, setIsOpen2] = useState(false);
@@ -23,8 +25,21 @@ function Gas(){
   const [object,setObject] = useState(mainnet_present_object)
   const [color,setColor] = useState("white")
   const [colorback,setColorBack]  = useState("grey")
+  const [option1name,setoption1name] = useState("")
+  const [networkset,setNetwork] = useState("")
   const ethereum = window.ethereum;
+   
+
+
+ window.ethereum.on('chainChanged', async ()=>{
+  const currentChainId = await window.ethereum.request({
+    method: 'eth_chainId',
+  });
  
+  handleOptionSelect1(mainnet_present_object[network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]])
+  
+ });
+
   const changeChain = async (args) =>{
  
      const res = await ethereum.request({ method: 'eth_accounts' })
@@ -49,6 +64,10 @@ function Gas(){
          }
  
        setAddress(res[0]);
+
+       console.log(args)
+
+      // handleOptionSelect1(mainnet_present_object[args])
      
    }
  }
@@ -110,6 +129,7 @@ function Gas(){
     try {
       changeChain(option.name)
       setSelectedOption1(option);
+      setoption1name(option.name)
       setIsOpen1(false);
       let array = routes[option.name]
      
@@ -242,7 +262,7 @@ const send = async ()=>{
           <div className="selectchains">
               <div className="fromchain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown1}>
+            <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black"}}>
               {selectedOption1 ? (
                 <>
                   <img src={selectedOption1.imageSrc} alt={selectedOption1.name} />
@@ -280,7 +300,7 @@ const send = async ()=>{
               </div>
               <div class="tochain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown2}>
+            <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black"}}>
               {selectedOption2 ? (
                 <>
                   <img src={selectedOption2.imageSrc} alt={selectedOption2.name} />

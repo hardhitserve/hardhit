@@ -129,6 +129,15 @@ function NftSend(){
      }
   }
 
+  window.ethereum.on('chainChanged', async ()=>{
+    const currentChainId = await window.ethereum.request({
+      method: 'eth_chainId',
+    });
+
+    handleOptionSelect1(mainnet_present_object[network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]])
+   });
+
+  
  const mainNetoption  = () =>{
   setOption(present_mainnet);
   setRoutes(mainnetRoutes)
@@ -324,7 +333,7 @@ const send = async ()=>{
           <div class="selectchains">
               <div className="fromchain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown1}>
+            <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black"}}>
               {selectedOption1 ? (
                 <>
                   <img src={selectedOption1.imageSrc} alt={selectedOption1.name} />
@@ -354,7 +363,7 @@ const send = async ()=>{
               </div>
               <div class="tochain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown2}>
+            <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black"}}>
               {selectedOption2 ? (
                 <>
                   <img src={selectedOption2.imageSrc} alt={selectedOption2.name} />

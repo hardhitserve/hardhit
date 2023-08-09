@@ -127,7 +127,7 @@ export const  mainnet_present_object = {
       id: 2,
       name: 'Bsc',
       imageSrc: './blockchainlogos/binance.png', // Replace with your image file path
-    },'Polygon':{
+    },"Polygon":{
       id: 3,
       name: 'Polygon',
       imageSrc: './blockchainlogos/polygonmatic.png', // Replace with your image file path
