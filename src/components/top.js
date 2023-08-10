@@ -179,13 +179,14 @@ try {
  }
 
 return ( 
-<div style={{ backgroundColor: "#0c0309"}}>
+<div style={{ backgroundColor: "black"}}>
 <header>
     <div class="container">
       <div class="logo-container">
         <img src="logo.png" alt="Logo" class="logo"/>
         <span class="project-name">HARD HIT</span>
       </div>
+      
       <nav class="navigation">
         <ul>
           <li onClick={e=>changeColor1()} style={{background: "none"}}><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color1}` }} >Home</Link></li>
@@ -195,8 +196,10 @@ return (
 
         </ul>
       </nav>
+     
+     
       <div class="buttons-container">
-        <button class="change-chain-button">{networkSet}</button>
+        <button style={{display: networkSet?"block":"none", cursor:'default'}} class="change-chain-button">{networkSet}</button>
         <button class="connect-button" onClick={isConnected}>{connected}</button>
       </div>
     </div>

@@ -75,17 +75,27 @@ header {
     }
   
     .project-name {
-      font-size: 16px;
+      font-size: 10px;
+      margin-right:10px;
     }
+    
   
     .navigation ul li {
       margin-right: 10px;
+      font-size: 10px;
+      
+    }
+    .navigation ul li Link {
+      color:#0c0309;
+     border: none;
+      
     }
   
     .change-chain-button,
     .connect-button {
-      font-size: 14px;
-      padding: 8px 16px;
+      font-size: 10px;
+      padding: 8px 4px;
+      width: auto;
     }
   }
   

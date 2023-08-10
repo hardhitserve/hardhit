@@ -344,9 +344,25 @@ const send = async ()=>{
               )}
             </button>
             {isOpen1 && (
-              <ul className="dropdown-options" style={{overflow:'visible',zIndex:10}}>
+              <ul class="dropdown-options" 
+              
+              style={{overflow:'visible',zIndex:10,
+               display:'flex',flexDirection:'column'
+               ,flexWrap:'wrap',height:'auto',
+               maxHeight:'300px',width:"170%"}}
+               
+               >  
+              
                 {options.map((option) => (
-                  <li key={option.id} style={{border:"1px solid pink"}} onClick={() => handleOptionSelect1(option)}>
+                  <li key={option.id}
+
+                  style={{border:"1px solid pink",width:"50%",boxSizing: "border-box",
+                  height:"50px",
+                  margin:"0.5px",
+                  borderRadius:"5px" 
+                }} 
+
+                   onClick={() => handleOptionSelect1(option)}>
                     <img src={option.imageSrc} alt={option.name} />
                     <span>{option.name}</span>
                   </li>
@@ -374,9 +390,24 @@ const send = async ()=>{
               )}
             </button>
             {isOpen2 && (
-              <ul className="dropdown-options" >
+              <ul className="dropdown-options" 
+              
+              style={{overflow:'visible',zIndex:10,
+              display:'flex',flexDirection:'column'
+              ,flexWrap:'wrap',height:'auto',
+              maxHeight:'300px',width:"170%"}}
+              
+              >
                 {options2.map((option) => (
-                  <li key={option.id} style={{border:"1px solid pink",}} onClick={() => handleOptionSelect2(option)}>
+                  <li key={option.id} 
+                  
+                  style={{border:"1px solid pink",width:"50%",boxSizing: "border-box",
+                  height:"50px",
+                  margin:"0.5px",
+                  borderRadius:"5px" 
+                }} 
+                  
+                  onClick={() => handleOptionSelect2(option)}>
                     <img src={option.imageSrc} alt={option.name} />
                     <span>{option.name}</span>
                   </li>
