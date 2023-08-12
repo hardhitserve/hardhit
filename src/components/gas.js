@@ -7,7 +7,7 @@ import { present_mainnet, mainnetRoutes,mainnet_present_object } from '../abi/ma
 import PopupMessage from './popup';
 import { ERC721ABI ,endpointAbi} from '../abi/erc721abi';
 import Footer from './footer';
-
+import { gasAmount } from '../abi/maxgas';
 
 function Gas(){
 
@@ -251,7 +251,7 @@ const send = async ()=>{
           <div class="claim-heading">
         <div>
       
-        <h3 style={{color:"white",borderBottom:"2px solid #e10bc1", marginBottom:'10px', margin:'auto',paddingBottom:'10px'}} >Send Native Gas</h3>
+        <h3 style={{color:"white",borderBottom:"2px solid #e10bc1", marginBottom:'10px', margin:'auto',paddingBottom:'10px'}} >Gas Refill</h3>
       
         </div>
            
@@ -365,26 +365,32 @@ const send = async ()=>{
           <div  class="qty">
               
         
-      <div>
+      <div style={{marginTop:"40px"}}>
         <p style={{color:"white"}}>Amount In Destination Chain</p>
-      
-        <input type="number" name="Amount" style={{width:100,fontSize:18,height:20}} onChange={(e)=>{
-          
-          setAmount(e.target.value)}} />
+        <p style={{color:'white',marginTop:'10px',marginBottom:"10px",fontSize:"small"}}>{`Max Gas : ${ selectedOption1 && selectedOption2 ? gasAmount[selectedOption1.name][selectedOption2.name][0]:"Undefined"}`}</p>
+
+        <input type="number" name="Amount" style={{width:100,fontSize:18,height:"20px",margin:0,marginBottom:"0px"}} onChange={(e)=>{ setAmount(e.target.value)}} />
+         
       </div>
       
       <div>
-        <input class='sendButton' style={{width:100,height:30,fontSize:15}}  type="button" value="Send" onClick={send}/>
+        <input class='sendButton' style={{width:100,height:"30px",fontSize:15,marginBottom:"5px"}}  type="button" value="Send" onClick={send}/>
+       
       </div>
-        
+     
           </div>
+        
         </div>
+
+
         <div class="button">
          
-<div style={{width:60}}></div>
+       <div style={{width:60}}></div>
 
            </div>
       </div>
+
+
 <p style={{fontStyle:'italic', color:'white',marginLeft:"20%",marginRight:"auto"}}>**Any extra fees will be refunded by the layerzero client</p>
       <PopupMessage error={errorMessage? errorMessage:null} />
       <Footer/>

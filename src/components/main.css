@@ -215,13 +215,13 @@ body{
 .buttons{
     display: flex;
     flex-direction: row;
-    padding-top: 0px;
+    padding-top: 10px;
     padding-bottom: 50px;
     padding-left: 20px;
     padding-right: 20px;
     width: 70%;
     height: auto;
-    margin:50px ;
+    margin:10px ;
     margin-left: 15%; 
     margin-right: 15%; 
     margin-top: 1%;

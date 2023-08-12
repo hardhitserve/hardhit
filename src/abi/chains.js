@@ -200,6 +200,13 @@ export const chains = {
         nativeCurrency: { name: "BASE", decimals: 18, symbol: "ETH" },
         blockExplorerUrls: ['https://basescan.org'],
         iconUrls: ['']
+      },"Tenet":{
+        chainId: "0x617", //"0x118":"Zksync-Testnet"
+        rpcUrls: ['https://rpc.tenet.org'],
+        chainName: "Tenet Mainnet",
+        nativeCurrency: { name: "TENET", decimals: 18, symbol: "TNT" },
+        blockExplorerUrls: ['https://tenetscan.io'],
+        iconUrls: ['']
       },
 
 }
@@ -236,9 +243,8 @@ export const network = {
   "0xA4b1": "Arbitrum",
   "0xA"   :"Optimism",
   "0x45C":"Core",
-  "0x2105":"Base"
-
-
+  "0x2105":"Base",
+  "0x617":"Tenet"
 }
 
 export const endpointContracts = {
@@ -256,6 +262,7 @@ export const endpointContracts = {
   "Mantle":"0xb6319cC6c8c27A8F5dAF0dD3DF91EA35C4720dd7",
   "Moonriver":"0x7004396C99D5690da76A7C59057C5f3A53e01704",
   "Core":"0x9740FF91F1985D8d2B71494aE1A2f723bb3Ed9E4",
+  "Tenet":"0x2D61DCDD36F10b22176E0433B86F74567d529aAa",
 
   "Goerli": "0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23",
   "Bsc-testnet": "0x6Fcb97553D41516Cb228ac03FdC8B9a0a9df04A1",
@@ -340,7 +347,8 @@ export const nftContracts = {
   "Linea":"",
   "Base":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Mantle":"",
-  "Core":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd"
+  "Core":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
+  "Tenet":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd"
   
 }
 
@@ -418,6 +426,7 @@ export const chainIds = {
     "Base":184,
   "Moonriver":        167,
   "Core" :            153,
+  "Tenet":173
 
 
 }
