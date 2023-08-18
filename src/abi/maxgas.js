@@ -100,6 +100,13 @@ export const gasAmount = {
         "Bsc":["1.3 BNB"],
         "Polygon":["300 MATIC"],
         "Optimism":["0.23 OPETH"]
+    },
+    "Mantle":{
+      "Bsc":["1.3 BNB"],
+      "Polygon":["300 MATIC"],
+      "Fantom":["600 FTM"],
+      "Avalanche":["15 AVAX"]
     }
+  
   
   }
