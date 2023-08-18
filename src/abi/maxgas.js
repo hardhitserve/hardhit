@@ -20,7 +20,7 @@ export const gasAmount = {
      "Core":[],
      "Arbitrum":["0.05 ArbETH"],
      "Optimism":["0.23 OPETH"],
-         "Mantle":[""]
+         "Mantle":["0.2 MNT"]
     },
   
     "Polygon":{
@@ -32,7 +32,7 @@ export const gasAmount = {
       "Core":[0],
       "Arbitrum":["0.05 ArbETH"],
       "Optimism":["0.23 OPETH"],
-         "Mantle":[""]
+         "Mantle":["0.2 MNT"]
     },
   
     "Fantom":{
@@ -44,7 +44,7 @@ export const gasAmount = {
       "Core":[],
       "Arbitrum":["0.05 ArbETH"],
       "Optimism":["0.23 OPETH"],
-         "Mantle":[""]
+         "Mantle":["0.2 MNT"]
   
     },
   
@@ -57,7 +57,7 @@ export const gasAmount = {
       "Core":[],
       "Arbitrum":["0.05 ArbETH"],
       "Optimism":["0.23 OPETH"],
-         "Mantle":[""]
+         "Mantle":["0.2 MNT"]
     },
     
     "Moonbeam":{
