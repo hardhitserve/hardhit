@@ -262,7 +262,7 @@ const send = async ()=>{
           <div className="selectchains">
               <div className="fromchain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black"}}>
+            <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black",height:"50px"}}>
               {selectedOption1 ? (
                 <>
                   <img src={selectedOption1.imageSrc} alt={selectedOption1.name} />
@@ -315,7 +315,7 @@ const send = async ()=>{
               </div>
               <div class="tochain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black"}}>
+            <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black",height:"50px"}}>
               {selectedOption2 ? (
                 <>
                   <img src={selectedOption2.imageSrc} alt={selectedOption2.name} />
