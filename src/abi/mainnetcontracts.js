@@ -10,7 +10,8 @@ export const mainnetRoutes  = {
     "Moonbeam":["Bsc","Polygon","Avalanche","Fantom"],
     "Core":["Bsc","Polygon"],
     "Base":["Bsc","Polygon","Optimism"],
-    "Tenet":["Bsc","Polygon","Fantom","Avalanche"]
+    "Tenet":["Bsc","Polygon","Fantom","Avalanche"],
+    "Mantle":["Bsc","Polygon","Fantom","Avalanche"],
 }
 
 
@@ -126,13 +127,13 @@ export const present_mainnet = [
           id: 16,
           name: 'Mantle',
           imageSrc: './blockchainlogos/Mantle-logo.jpg', // Replace with your image file path
-        },
+        }
         
-        // ,{
-        //   id:15,
-        //   name:"Tenet",
-        //   imageSrc:"./blockchainlogos/tenet.jpg"
-        // },
+        ,{
+          id:15,
+          name:"Tenet",
+          imageSrc:"./blockchainlogos/tenet.jpg"
+        },
     
 
     ]
@@ -185,6 +186,10 @@ export const  mainnet_present_object = {
       id:15,
       name:"Tenet",
       imageSrc:"./blockchainlogos/tenet.jpg"
+    },"Mantle":{
+      id: 16,
+          name: 'Mantle',
+          imageSrc: './blockchainlogos/Mantle-logo.jpg', // Replace with your image file path
     }
   }
 
