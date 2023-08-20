@@ -47,13 +47,12 @@ function GasRevamped(){
 
     let ObtainedAmount = (parseFloat(args)/await fetchData(selectedOption2.name))
 
-    console.log(ObtainedAmount)
+   
 
     setAmount(ObtainedAmount)
 
     await sendReal(ObtainedAmount)
 
-    //console.log( `➡️ ${amount},😍 ${await sendReal(amount)}`)
 
     } catch (error) {
       setError("Select From and To chains")
@@ -64,7 +63,7 @@ function GasRevamped(){
 
   const debounceApiCall = _.debounce((value) => {
     handleButtonClick(value);
-    console.log(`Sending API request with value: ${value}`);
+   
   }, 3000);
 
   const handleInputChangeInCustom = (event) => {
@@ -123,7 +122,7 @@ function GasRevamped(){
  
        setAddress(res[0]);
 
-       console.log(args)
+      
 
       // handleOptionSelect1(mainnet_present_object[args])
      
@@ -223,7 +222,6 @@ const send = async ()=>{
 
   try {
 
-    console.log(amount.toString())
 
     const contract_address = nftContracts[selectedOption1.name];
 
@@ -248,9 +246,6 @@ const send = async ()=>{
 
     const gas = ethers.parseUnits((parseFloat(ethers.formatEther(fees[0]))*parseFloat(1.012)).toString(),'ether')
 
-    console.log(gas,ethers.formatEther(fees[0]))
-
-    console.log(`Amount 😊 ${amount} and Gas fees 🚀 ${gas}`)
 
     let tx = await (
   
@@ -275,7 +270,7 @@ const send = async ()=>{
         chainIds[selectedOption2.name],tx.transactionHash
       );
 
-     console.log(messages)
+  
   } catch (error) {
  try {
   if((error.reason).includes("dstNativeAmt too large")){
@@ -297,7 +292,7 @@ const send = async ()=>{
 
   const sendReal = async (args)=>{
 
-    console.log(args)
+   
 
     const contract_address = nftContracts[selectedOption1.name];
 
@@ -317,11 +312,10 @@ const send = async ()=>{
 
     let fees = await endpoint.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams);
 
-    console.log(ethers.formatEther(fees[0]))
 
     setGasConsumed(ethers.formatEther(fees[0]))
 
-    // console.log(`Amount 😊 ${amount} and Gas fees 🚀 ${"jhb"}`)
+   
 
     
 
