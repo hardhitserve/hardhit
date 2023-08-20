@@ -1,17 +1,16 @@
 
 
 export const mainnetRoutes  = {
-    "Bsc":["Polygon","Avalanche","Fantom","Base","Moonbeam","Core","Arbitrum","Optimism"],
-    "Polygon":["Bsc","Avalanche","Fantom","Base","Moonbeam","Arbitrum","Optimism","Core"],
-    "Avalanche":["Bsc","Polygon","Fantom","Moonbeam","Core","Arbitrum","Optimism","Base"],
-    "Fantom":["Bsc","Polygon","Avalanche","Moonbeam","Core","Arbitrum","Optimism","Base"],
+    "Bsc":["Polygon","Avalanche","Fantom","Base","Moonbeam","Core","Arbitrum","Optimism","Mantle"],
+    "Polygon":["Bsc","Avalanche","Fantom","Base","Moonbeam","Arbitrum","Optimism","Core","Mantle"],
+    "Avalanche":["Bsc","Polygon","Fantom","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle"],
+    "Fantom":["Bsc","Polygon","Avalanche","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle"],
     "Optimism":["Bsc","Polygon","Base","Avalanche","Fantom","Arbitrum","Moonbeam","Base"],
     "Arbitrum":["Bsc","Polygon","Avalanche","Fantom","Optimism","Moonbeam","Base"],
     "Moonbeam":["Bsc","Polygon","Avalanche","Fantom"],
     "Core":["Bsc","Polygon"],
     "Base":["Bsc","Polygon","Optimism"],
-    "Tenet":["Bsc","Polygon","Fantom","Avalanche"],
-    "Mantle":["Bsc","Polygon","Fantom","Avalanche"],
+    "Tenet":["Bsc","Polygon","Fantom","Avalanche"]
 }
 
 
@@ -133,7 +132,8 @@ export const present_mainnet = [
         //   id:15,
         //   name:"Tenet",
         //   imageSrc:"./blockchainlogos/tenet.jpg"
-        // }
+        // },
+    
 
     ]
 export const  mainnet_present_object = {
@@ -185,11 +185,7 @@ export const  mainnet_present_object = {
       id:15,
       name:"Tenet",
       imageSrc:"./blockchainlogos/tenet.jpg"
-    },"Mantle":{
-      id: 15,
-      name: 'Mantle',
-      imageSrc: './blockchainlogos/Mantle-logo.jpg', // Replace with your image file path
-    },
+    }
   }
 
   export const present_Tokens_mainnet = [

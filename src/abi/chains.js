@@ -251,8 +251,7 @@ export const network = {
   "0xA"   :"Optimism",
   "0x45C":"Core",
   "0x2105":"Base",
-  "0x617":"Tenet",
-  "0x1388":"Mantle"
+  "0x617":"Tenet"
 }
 
 export const endpointContracts = {
