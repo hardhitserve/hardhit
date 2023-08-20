@@ -9,6 +9,7 @@ import PopupMessage from './popup';
 import Footer from './footer';
 import NftIdAlchemy from './nftidalchemy';
 import { networksApi } from './nftidalchemy';
+import './gasrevamp.css'
 
 function NftSend(){
   const [isOpen1, setIsOpen1] = useState(false);
@@ -155,6 +156,7 @@ function NftSend(){
 
   const toggleDropdown1 = () => {
     setIsOpen1(!isOpen1);
+    setSelectedOption2(null)
   };
   const toggleDropdown2 = () => {
     if(selectedOption1){
@@ -317,23 +319,17 @@ const send = async ()=>{
       </div>
       
 
-          <div class="buttons">
-        <div class="content">
-          <div class="claim-heading">
-        <div>
-      
-        <h3 style={{color:"white",borderBottom:"2px solid #e10bc1", marginBottom:'10px', margin:'auto',paddingBottom:'10px'}} >Send NFTs</h3>
-      
-        </div>
-           
-            
-          </div>
+    <div class="buttonss" style={{width:'45%',marginRight:'auto',marginLeft:'auto',height:'auto'}}>
+           <div className="content">
+        <div className="heading">
+             <h3 style={{color:"white"}}>Send ONFT</h3>
+            </div>
       
          
           <div class="selectchains">
               <div className="fromchain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black"}}>
+            <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black",height:"50px"}}>
               {selectedOption1 ? (
                 <>
                   <img src={selectedOption1.imageSrc} alt={selectedOption1.name} />
@@ -372,14 +368,10 @@ const send = async ()=>{
           </div>
       
               </div>
-              <div style={{height:"50px",marginLeft:"20px"}}>
-                
-                <img src="Changechain.png" alt="ChangeChain" style={{width:60,height:30 , filter: "invert(1)",marginTop:10, cursor:'pointer'}} onClick={()=> { selectedOption2 ? changeChain(selectedOption2.name):setError("Select Both Option Fields")}} />
-
-              </div>
+            
               <div class="tochain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black"}}>
+            <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black",height:"50px"}}>
               {selectedOption2 ? (
                 <>
                   <img src={selectedOption2.imageSrc} alt={selectedOption2.name} />
@@ -420,36 +412,58 @@ const send = async ()=>{
       
           </div>
       
-          <div  class="qty">
-              
-        
-      <div>
-        <p style={{color:"white"}}>Token ID</p>
+       
+                {/* claim button */}
       
-        <input type="number" name="Quantity" style={{width:150,fontSize:15}} onChange={(e)=>{
-          
-          setTokenID(e.target.value)}} />
-      </div>
-      
-      <div>
-        <input class='sendButton' style={{width:100,height:30,fontSize:15}}  type="button" value="Send" onClick={send}/>
-      </div>
-        
-            
-          </div>
-        </div>
+         <div class='alldetails' style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',marginTop:"-100px"}}>
+
         <div class="button" >
           {/* <Link to="/mint" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",color:"white",backgroundColor:"#e10bc1",padding:6,border: "2px solid #e10bc1",borderRadius:5}} disabled>Mint</Link> */}
           {/* <img src="https://ipfs.io/ipfs/QmdvdVhJhVRdoApEmAy6A5AsihrVi3EN8rxNbxsawhzpt7" style={{width:"100px","height":"100px",marginLeft:"10px",marginBottom:"10px",border:"2px solid pink"}} alt="" /> */}
-          <button style={{width:"auto", background:"none",textDecoration:"none",color:"white",backgroundColor:"#e10bc1",padding:6,border: "2px solid #e10bc1",borderRadius:5}} onClick={mint}>Mint</button>
+          <button style={{width:"auto", background:"none",textDecoration:"none",color:"white",padding:6,border: "2px solid #53a7df",borderRadius:5,backgroundColor:''}} onClick={mint}>Mint</button>
           <p style={{color:"whitesmoke"}}>{number?number:"Not Avaialble"}/1000</p>
-           </div>
-           <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-   
-    </div>
-            
-          </div>
+        </div>
+        <div className="sendButon" style={{width:"100%",marginTop:"10px",backgroundColor:"#26292c",padding:5,borderRadius:5,display:'flex',flexDirection:'column',alignItems:'center'}}>
 
+              <p style={{color:"white"}}>Token ID</p>
+            
+              <input type="number" name="Quantity" style={{width:150,fontSize:15}} onChange={(e)=>{
+                
+                setTokenID(e.target.value)}} />
+
+<input class='sendButton' style={{width:100,height:30,fontSize:15}}  type="button" value="Send" onClick={ ()=>{
+   if(selectedOption1){
+    send()
+  } else{
+    setError("Select from and To chains")
+  }
+}
+ }/>
+
+        </div>
+      
+            
+      </div>
+
+
+      <div className="layerzero" style={{display:"flex",flexDirection:"row",width:"100%",alignItems:"center",marginBottom:"-30px",justifyContent:'center',marginTop:'10px'}}>
+                                        <p style={{color:"white",marginRight:"5px",fontWeight:"bold",fontSize:"small"}}>
+                                          Powered By
+                                        </p>
+                                        <div>
+                                        <img src="layerzero.png" alt="logo" style={{width:"20px",height:"20px",marginRight:"2px"}}/>
+                                        </div>
+                                      <div>
+                                      <p style={{color:"white",fontSize:"small"}}>Layerzero</p>
+                                      </div>
+                          
+                        </div>
+      </div>
+  </div>
+
+      
+          
+   
           <NftIdAlchemy argu={{
             network:networkset,
             contract:nftContracts[networkset],
@@ -460,6 +474,9 @@ const send = async ()=>{
 
       <PopupMessage error={errorMessage} />
       <Footer/>
+
+
+      
           </div>
     )
 }

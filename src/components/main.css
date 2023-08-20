@@ -248,10 +248,19 @@ body{
         align-items: center;
         overflow:inherit;
         padding:0px;
+        
 
     }
     .button div{
         width: 10%;
+    }
+
+    .qty .qtydiv{
+        margin-top:0px;
+        border: 2px solid white;
+    }
+    .selectchains {
+        margin-bottom: 0px;
     }
      
   }
@@ -364,8 +373,6 @@ h4{
 .qty-button button{
     margin:1%;
     background-color: #e10bc1;
-    
-    
 }
 
 
@@ -537,3 +544,45 @@ h4{
     padding: 150px;
     
 }
+
+
+
+
+
+/* 5$ 10$ 20$ */
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: -15px;
+    margin-bottom: 20px;
+  }
+  
+  .amount-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .amount-button.selected {
+    background-color: #53a7df;
+    color: white;
+  }
+  
+ 
+  .button-container button{
+    width: auto;
+    font-size: small;
+    padding: none;
+  }
+
+
+  /* @media screen and (max-width: 700px) {
+    .dropdown-button {
+ 
+         min-width: 100px;
+         border : 10px solid green
+         
+     }
+ } */

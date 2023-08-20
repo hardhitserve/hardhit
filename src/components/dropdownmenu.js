@@ -12,6 +12,7 @@ import { present_Tokens_mainnet, mainnet_present_object,mainnetRoutes }
   from '../abi/mainnetcontracts';
 import PopupMessage from './popup';
 import Footer from './footer';
+import './gasrevamp.css'
 
 const DropdownMenu = () => {
 
@@ -148,6 +149,7 @@ const DropdownMenu = () => {
 
   const toggleDropdown1 = () => {
     setIsOpen1(!isOpen1);
+    setSelectedOption2(null)
   };
   const toggleDropdown2 = () => {
     if(selectedOption1){
@@ -252,7 +254,7 @@ const balance =async(argsnetwork)=>{
  
    const weiValue = ethers.toBigInt(tx.toString()); // 1 Ether in Wei (10^18 Wei)
    const etherValue = convertWeiToEther(weiValue);
-   setbalance(etherValue +"HTT");
+   setbalance(parseFloat(etherValue).toFixed(0) +" HTT");
 
   } catch (error) {
     
@@ -331,23 +333,17 @@ const send = async ()=>{
 </div>
 
 
-    <div class="buttons">
-  <div class="content">
-    <div class="claim-heading">
-  <div>
-
-  <h3 style={{color:"white",borderBottom:"2px solid #e10bc1", marginBottom:'10px', margin:'auto',paddingBottom:'10px'}} >Send Tokens</h3>
-
-  </div>
-     
-      
-    </div>
+    <div class="buttonss" style={{width:"45%",margin:'auto',height:'auto',}}>
+       <div class="content" >
+       <div className="heading">
+       <h3 style={{color:"white"}}>Send OFT</h3>
+     </div>
 
    
     <div class="selectchains">
         <div className="fromchain">
         <div className="dropdown-container">
-      <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black"}}>
+      <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black",height:"50px"}}>
         {selectedOption1 ? (
           <>
             <img src={selectedOption1.imageSrc} alt={selectedOption1.name} />
@@ -385,14 +381,10 @@ const send = async ()=>{
     </div>
 
         </div>
-        <div style={{height:"50px",marginLeft:"20px"}}>
-                
-                <img src="Changechain.png" alt="ChangeChain" style={{width:60,height:30 , filter: "invert(1)",marginTop:10, cursor:'pointer'}} onClick={()=> { selectedOption2 ? changeChain(selectedOption2.name):setError("Select Both Option Fields")}} />
-
-              </div>
+      
         <div class="tochain">
         <div className="dropdown-container">
-      <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black"}}>
+      <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black",height:"50px"}}>
         {selectedOption2 ? (
           <>
             <img src={selectedOption2.imageSrc} alt={selectedOption2.name} />
@@ -432,30 +424,52 @@ const send = async ()=>{
         </div>
 
     </div>
-
-    <div  class="qty">
+    <div class='alldetails' style={{display:'flex',flexDirection:'column',alignItems:'center',justifyContent:'center',marginTop:"-100px"}}>
         
+        <div class="button">
+        <button onClick={claim}>Claim</button>
+        <p style={{color:"whitesmoke",fontSize:'small'}}>Balance:{`${balanceOfaccount}`}</p>
+        </div>
+
+       <div className="sendButon" style={{width:"60%",marginTop:"10px",backgroundColor:"#26292c",padding:5,borderRadius:5,display:'flex',flexDirection:'column',alignItems:'center'}}>
   
-<div>
+      <p style={{color:"white",}}>Quantity</p>
+
+      <input type="number" name="Quantity" style={{width:150,fontSize:15,margin:5}} onChange={(e)=>{
+  
+      setQty(e.target.value)}} />
+
+      <input class='amount-button'  style={{width:"100%",alignItems:'center',height:'25px',padding:'1px',border:"2px solid white",borderRadius:2,marginBottom:'10px'}}  type="button" value="Send" onClick={send}/>
+
+     </div>
+
+</div>
+        
+{/*   
+<div style={{marginTop:"100px"}}>
   <p style={{color:"white"}}>Quantity</p>
 
   <input type="number" name="Quantity" style={{width:150,fontSize:15}} onChange={(e)=>{
     
     setQty(e.target.value)}} />
   
-</div>
+</div> */}
 
-<div>
-  <input class='sendButton' style={{width:100,height:30,fontSize:15}}  type="button" value="Send" onClick={send}/>
+<div className="layerzero" style={{display:"flex",flexDirection:"row",width:"100%",alignItems:"center",marginBottom:"-30px",justifyContent:'center'}}>
+                                        <p style={{color:"white",marginRight:"5px",fontWeight:"bold",fontSize:"small"}}>
+                                          Powered By
+                                        </p>
+                                        <div>
+                                        <img src="layerzero.png" alt="logo" style={{width:"20px",height:"20px",marginRight:"2px"}}/>
+                                        </div>
+                                      <div>
+                                      <p style={{color:"white",fontSize:"small"}}>Layerzero</p>
+                                      </div>
+                          
+                        </div>
 
-</div>
-  
-    </div>
-  </div>
-  <div class="button">
-   <button onClick={claim}>Claim</button>
-   <p style={{color:"whitesmoke"}}>Balance:{`${balanceOfaccount}`}</p>
-  </div>
+       </div>
+ 
 </div>
 
 

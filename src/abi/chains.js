@@ -207,7 +207,14 @@ export const chains = {
         nativeCurrency: { name: "TENET", decimals: 18, symbol: "TNT" },
         blockExplorerUrls: ['https://tenetscan.io'],
         iconUrls: ['']
-      },
+      },"Mantle":{
+        chainId: "0x1388", //"0x118":"Zksync-Testnet"
+        rpcUrls: ['https://rpc.mantle.xyz'],
+        chainName: "Mantle Mainnet",
+        nativeCurrency: { name: "MNT", decimals: 18, symbol: "MNT" },
+        blockExplorerUrls: ['https://explorer.mantle.xyz'],
+        iconUrls: ['']
+      }
 
 }
 
@@ -244,7 +251,8 @@ export const network = {
   "0xA"   :"Optimism",
   "0x45C":"Core",
   "0x2105":"Base",
-  "0x617":"Tenet"
+  "0x617":"Tenet",
+  "0x1388":"Mantle"
 }
 
 export const endpointContracts = {
@@ -263,6 +271,7 @@ export const endpointContracts = {
   "Moonriver":"0x7004396C99D5690da76A7C59057C5f3A53e01704",
   "Core":"0x9740FF91F1985D8d2B71494aE1A2f723bb3Ed9E4",
   "Tenet":"0x2D61DCDD36F10b22176E0433B86F74567d529aAa",
+  
 
   "Goerli": "0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23",
   "Bsc-testnet": "0x6Fcb97553D41516Cb228ac03FdC8B9a0a9df04A1",
@@ -346,7 +355,7 @@ export const nftContracts = {
   "Avalanche":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Linea":"",
   "Base":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
-  "Mantle":"",
+  "Mantle":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Core":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Tenet":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd"
   

@@ -19,7 +19,8 @@ export const gasAmount = {
      "Moonbeam":["10 GLMR"],
      "Core":[],
      "Arbitrum":["0.05 ArbETH"],
-     "Optimism":["0.23 OPETH"]
+     "Optimism":["0.23 OPETH"],
+     "Mantle":[""]
     },
   
     "Polygon":{
@@ -30,7 +31,8 @@ export const gasAmount = {
       "Moonbeam":["10 GLMR"],
       "Core":[0],
       "Arbitrum":["0.05 ArbETH"],
-      "Optimism":["0.23 OPETH"]
+      "Optimism":["0.23 OPETH"],
+      "Mantle":[""]
     },
   
     "Fantom":{
@@ -41,7 +43,8 @@ export const gasAmount = {
       "Moonbeam":["10 GLMR"],
       "Core":[],
       "Arbitrum":["0.05 ArbETH"],
-      "Optimism":["0.23 OPETH"]
+      "Optimism":["0.23 OPETH"],
+      "Mantle":[""]
   
     },
   
@@ -53,7 +56,8 @@ export const gasAmount = {
       "Moonbeam":["10 GLMR"],
       "Core":[],
       "Arbitrum":["0.05 ArbETH"],
-      "Optimism":["0.23 OPETH"]
+      "Optimism":["0.23 OPETH"],
+      "Mantle":[""]
     },
     
     "Moonbeam":{
@@ -100,6 +104,12 @@ export const gasAmount = {
         "Bsc":["1.3 BNB"],
         "Polygon":["300 MATIC"],
         "Optimism":["0.23 OPETH"]
+    },
+    "Mantle":{
+      "Bsc":["1.3 BNB"],
+      "Polygon":["300 MATIC"],
+      "Fantom":["600 FTM"],
+      "Avalanche":["15 AVAX"]
     }
   
   }

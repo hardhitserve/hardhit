@@ -262,7 +262,7 @@ const send = async ()=>{
           <div className="selectchains">
               <div className="fromchain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black"}}>
+            <button className="dropdown-button" onClick={toggleDropdown1} style={{backgroundColor:"white",color:"black",height:"50px"}}>
               {selectedOption1 ? (
                 <>
                   <img src={selectedOption1.imageSrc} alt={selectedOption1.name} />
@@ -279,7 +279,6 @@ const send = async ()=>{
               display:'flex',flexDirection:'column'
               ,flexWrap:'wrap',height:'auto',
               maxHeight:'300px',width:"170%"}}
-             
               >
                 {options.map((option) =>
 
@@ -315,7 +314,7 @@ const send = async ()=>{
               </div>
               <div class="tochain">
               <div className="dropdown-container">
-            <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black"}}>
+            <button className="dropdown-button" onClick={toggleDropdown2} style={{backgroundColor:"white",color:"black",height:"50px"}}>
               {selectedOption2 ? (
                 <>
                   <img src={selectedOption2.imageSrc} alt={selectedOption2.name} />
@@ -365,8 +364,8 @@ const send = async ()=>{
           <div  class="qty">
               
         
-      <div style={{marginTop:"40px"}}>
-        <p style={{color:"white"}}>Amount In Destination Chain</p>
+      <div style={{marginTop:"40px"}} class="qtydiv">
+        <p style={{color:"white",fontSize:"medium"}}>Amount In Destination Chain</p>
         <p style={{color:'white',marginTop:'10px',marginBottom:"10px",fontSize:"small"}}>{`Max Gas : ${ selectedOption1 && selectedOption2 ? gasAmount[selectedOption1.name][selectedOption2.name][0]:"Undefined"}`}</p>
 
         <input type="number" name="Amount" style={{width:100,fontSize:18,height:"20px",margin:0,marginBottom:"0px"}} onChange={(e)=>{ setAmount(e.target.value)}} />
@@ -374,7 +373,7 @@ const send = async ()=>{
       </div>
       
       <div>
-        <input class='sendButton' style={{width:100,height:"30px",fontSize:15,marginBottom:"5px"}}  type="button" value="Send" onClick={send}/>
+        <input class='sendButton' style={{width:100,height:"30px",fontSize:15,marginBottom:"20px",paddingTop:"5px",borderRadius:"2px"}}  type="button" value="Send" onClick={send}/>
        
       </div>
      

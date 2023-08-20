@@ -8,6 +8,7 @@ import PopupMessage from './popup';
 
 
 function Header(){
+
   const [address,setAddress] = useState("")
 
   const [connected, setConnected] = useState("Connect")
@@ -18,10 +19,14 @@ function Header(){
 
   const [error,setError] = useState('')
 
-  const [color1,setColor1] = useState('')
-  const [color2,setColor2] = useState('')
-  const [color3,setColor3] = useState('')
-  const [color4,setColor4] = useState('')
+  
+  const [showMenu, setShowMenu] = useState(false);
+
+  const [setClicked,clicked] = useState(false)
+
+  const [page,setPage] = useState('')
+
+  const [ url,setUrl] = useState('')
 
   const provider = window.ethereum
 
@@ -78,40 +83,22 @@ function Header(){
     }
   )
  
-// const changecolor =(args)=>{
-//     let array = [1,2,3,4]
 
-//     for(let i=0;i.array.length;i++){
-//       if(args=== array[i]){
-        
-//       }
-//     }
-// }
+const toggleMenu = () => {
+  console.log(showMenu)
+  setShowMenu(!showMenu);
+};
  
-  const changeColor1 =()=>{
-    setColor1('#e10bc1')
-    setColor2('pink')
-    setColor3('pink')
-    setColor4('pink')
-  }
-  const changeColor2 =()=>{
-    setColor1('pink')
-    setColor2('#e10bc1')
-    setColor3('pink')
-    setColor4('pink')
-  }
-  const changeColor3 =()=>{
-    setColor1('pink')
-    setColor2('pink')
-    setColor3('#e10bc1')
-    setColor4('pink')
-  }
-  const changeColor4 =()=>{
-    setColor1('pink')
-    setColor2('pink')
-    setColor3('pink')
-    setColor4('#e10bc1')
-  }
+const webpage =()=>{
+  
+} 
+
+const pageClicked =(args)=>{
+  setPage(args)
+  setUrl(window.location.href)
+}
+  
+ 
 
 
 window.ethereum.on('chainChanged',async ()=>{  
@@ -174,8 +161,6 @@ try {
   setError(error.toString().split('\n')[0])
 }
 
-
-
  }
 
 return ( 
@@ -188,13 +173,17 @@ return (
       </div>
       
       <nav class="navigation">
-        <ul>
-          <li onClick={e=>changeColor1()} style={{background: "none"}}><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color1}` }} >Home</Link></li>
-          <li onClick={e=>changeColor2()}><Link to="/nfts" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color2}`}}>NFT</Link></li>
-          <li onClick={e=>changeColor3()}><Link to="/tokens" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color3} `}}>Tokens</Link></li>
-          <li onClick={e=>changeColor4()}><Link to="/gas" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `6px solid ${color4}`}} >GAS</Link></li>
-
+    
+        <ul  className={`navbar-items ${showMenu ? "show" : ""}`}>
+          <li className={`navbar-clicked ${page==='home'?"show":""}`} onClick={e=>pageClicked("home")} style={{background: "none"}}><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid ` }} >Home</Link></li>
+          <li className={`navbar-clicked ${page==='nft'?"show":""}`} onClick={e=>pageClicked("nft")}><Link to="/nfts" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid `}}>NFT</Link></li>
+          <li className={`navbar-clicked ${page==='token'?"show":""}`} onClick={e=>pageClicked("token")}><Link to="/tokens" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid  `}}>Tokens</Link></li>
+          <li className={`navbar-clicked ${page==='gas'?"show":""}`} onClick={e=>pageClicked("gas")}><Link to="/gasrefill" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid `}} >Gas</Link></li>
         </ul>
+
+        <div className="menu-icon" onClick={toggleMenu}>
+            &#9776;
+          </div>
       </nav>
      
      

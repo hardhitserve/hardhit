@@ -18,7 +18,7 @@ function HomePage(){
 
         <nav>
           <button className="active">Home page</button>
-          <button className="active" style={{textDecoration:"none",}}><Link style={{backgroundcolor:"none",textDecoration:"none",color:"whitesmoke"}} to="/dropdown">Open App</Link></button>
+          <button className="active" style={{textDecoration:"none",}}><Link style={{backgroundcolor:"none",textDecoration:"none",color:"whitesmoke"}} to="/gasrefill">Open App</Link></button>
         </nav>
 
         <section>

@@ -7,6 +7,7 @@ import HomePage from './components/Home';
 import DropdownMenu from './components/dropdownmenu'
 import './components/main.css'
 import Gas from './components/gas';
+import GasRevamped from './components/gasrevamped';
 
 
 function App() {
@@ -34,14 +35,13 @@ function App() {
           <Route path="/mint" element={ <Mint />}>
            
            </Route>
-           <Route path="/gas" element={ <Gas />}>
-           
-           </Route>
-         
-{/* 
-           <Route path="/remove" element={ <AppDropDown />}>
+           {/* <Route path="/gas" element={ <Gas />}>
            
            </Route> */}
+         
+
+           <Route path="/gasrefill" element={ < GasRevamped/>}>
+           </Route>
         </Routes>
     </div>
     </Router>

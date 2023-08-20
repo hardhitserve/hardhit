@@ -10,7 +10,8 @@ export const mainnetRoutes  = {
     "Moonbeam":["Bsc","Polygon","Avalanche","Fantom"],
     "Core":["Bsc","Polygon"],
     "Base":["Bsc","Polygon","Optimism"],
-    "Tenet":["Bsc","Polygon","Fantom","Avalanche"]
+    "Tenet":["Bsc","Polygon","Fantom","Avalanche"],
+    "Mantle":["Bsc","Polygon","Fantom","Avalanche"],
 }
 
 
@@ -122,7 +123,11 @@ export const present_mainnet = [
           id: 6,
           name: 'Base',
           imageSrc: './blockchainlogos/base.png', // Replace with your image file path
-        }
+        },{
+          id: 16,
+          name: 'Mantle',
+          imageSrc: './blockchainlogos/Mantle-logo.jpg', // Replace with your image file path
+        },
         
         // ,{
         //   id:15,
@@ -180,7 +185,11 @@ export const  mainnet_present_object = {
       id:15,
       name:"Tenet",
       imageSrc:"./blockchainlogos/tenet.jpg"
-    }
+    },"Mantle":{
+      id: 15,
+      name: 'Mantle',
+      imageSrc: './blockchainlogos/Mantle-logo.jpg', // Replace with your image file path
+    },
   }
 
   export const present_Tokens_mainnet = [
