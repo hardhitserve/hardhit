@@ -82,17 +82,20 @@ function GasRevamped(){
     }
  
       
-  
   }
 
- window.ethereum.on('chainChanged', async ()=>{
-  const currentChainId = await window.ethereum.request({
-    method: 'eth_chainId',
-  });
- 
-  handleOptionSelect1(mainnet_present_object[network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]])
-  
- });
+
+  if(window.ethereum){
+    window.ethereum.on('chainChanged', async ()=>{
+      const currentChainId = await window.ethereum.request({
+        method: 'eth_chainId',
+      });
+     
+      handleOptionSelect1(mainnet_present_object[network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]])
+      
+     });
+  }
+
 
   const changeChain = async (args) =>{
  
@@ -115,7 +118,7 @@ function GasRevamped(){
           //  method: 'wallet_addEthereumChain',
           //  params: [chains[args]],
           //  }).then(response => console.log(""))
-          setError("Add chain to change ")
+          setError("Chain not detected")
           
          }
          }
@@ -355,7 +358,7 @@ const send = async ()=>{
                 style={{overflow:'visible',zIndex:10,
                 display:'flex',flexDirection:'column'
                 ,flexWrap:'wrap',height:'auto',
-                maxHeight:'300px',width:"170%"}}
+                maxHeight:'400px',width:"170%"}}
                 
                 >
                     {options.map((option) =>
@@ -466,7 +469,7 @@ const send = async ()=>{
 
                     
                     </div>
-                    <p style={{color:'white',marginTop:'10px',marginBottom:"10px",fontSize:"small",marginLeft:"auto",marginRight:"auto"}}>{`Max Gas : ${ selectedOption1 && selectedOption2 ? gasAmount[selectedOption1.name][selectedOption2.name][0]:"Undefined"}`}</p>
+                    <p style={{color:'white',marginTop:'10px',marginBottom:"10px",fontSize:"small",marginLeft:"auto",marginRight:"auto"}}>{`Max Gas : ${ selectedOption1 && selectedOption2 ? gasAmount[selectedOption1.name][selectedOption2.name]?gasAmount[selectedOption1.name][selectedOption2.name][0]:"Undefined":"Undefined"}`}</p>
 
                     <div class="inputs">
 

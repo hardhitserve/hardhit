@@ -15,7 +15,8 @@ export const tickers = {
     "Tenet" : "tenet-1b000f7b-59cb-4e06-89ce-d62b32d362b9",
     "zkSync":"ethereum",
     "zkEvm":"ethereum",
-    "Core":"coredaoorg"
+    "Core":"coredaoorg",
+    "Metis":"metis-token"
     
 }
 
@@ -33,7 +34,8 @@ export const tokenTickers={
   "Tenet" : "TENET",
   "zkSync":"ETH",
   "zkEvm":"ETH",
-  "Core":"CORE"
+  "Core":"CORE",
+  "Metis":"METIS"
 }
 
  export  async function fetchData(args){

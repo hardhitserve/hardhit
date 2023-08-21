@@ -9,6 +9,7 @@ import PopupMessage from './popup';
 
 function Header(){
 
+ 
   const [address,setAddress] = useState("")
 
   const [connected, setConnected] = useState("Connect")
@@ -37,6 +38,7 @@ function Header(){
       async function connectButton(){
 
         try {
+
           const res = await provider.request({ method: 'eth_accounts' })
 
           if (res.length === 0) {
@@ -68,19 +70,27 @@ function Header(){
           // window.ethereum.on('chainChanged', ()=>{console.log("jhbjh")});
 
         setBalance((ethers.formatEther(balance)).substring(0, 5)+" ETH")
-            setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
+        setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`])
   
-            setAddress(res[0]);
-          }
+        setAddress(res[0]);
+
+
+        }
         } catch (error) {
+          if(!provider){
+            setError("Error: Metamask not detected")
+          } else {
           setError("Wallet Not Connected")
+          }
         }
 
       
       }
-      connectButton()
-      
-    }
+
+        connectButton()
+  
+    },[provider,isConnected]
+
   )
  
 
@@ -89,31 +99,39 @@ const toggleMenu = () => {
   setShowMenu(!showMenu);
 };
  
-const webpage =()=>{
-  
-} 
+
 
 const pageClicked =(args)=>{
   setPage(args)
-  setUrl(window.location.href)
+  
 }
   
  
 
 
-window.ethereum.on('chainChanged',async ()=>{  
+if(window.ethereum){
+  window.ethereum.on('chainChanged',async ()=>{  
 
-  const currentChainId = await provider.request({
-    method: 'eth_chainId',
+    try {
+      const currentChainId = await provider.request({
+        method: 'eth_chainId',
+      });
+    
+      
+      setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]);
+    } catch (error) {
+      
+    }
+  
   });
-
   
-  setNetworkSet(network[`0x${currentChainId.toUpperCase().replace("0X", '')}`]);} 
-  
-  );
+} else {
+ 
+}
 
 
-  async function isConnected() {
+
+async function isConnected() {
 
 try {
   
@@ -158,7 +176,7 @@ try {
 
   }
 } catch (error) {
-  setError(error.toString().split('\n')[0])
+  setError("Connected")
 }
 
  }

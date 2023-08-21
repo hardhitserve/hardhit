@@ -35,9 +35,9 @@ function App() {
           <Route path="/mint" element={ <Mint />}>
            
            </Route>
-           {/* <Route path="/gas" element={ <Gas />}>
+           <Route path="/gas" element={ <Gas />}>
            
-           </Route> */}
+           </Route>
          
 
            <Route path="/gasrefill" element={ < GasRevamped/>}>

@@ -1,10 +1,10 @@
 
 
 export const mainnetRoutes  = {
-    "Bsc":["Polygon","Avalanche","Fantom","Base","Moonbeam","Core","Arbitrum","Optimism","Mantle"],
-    "Polygon":["Bsc","Avalanche","Fantom","Base","Moonbeam","Arbitrum","Optimism","Core","Mantle"],
-    "Avalanche":["Bsc","Polygon","Fantom","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle"],
-    "Fantom":["Bsc","Polygon","Avalanche","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle"],
+    "Bsc":["Polygon","Avalanche","Fantom","Base","Moonbeam","Core","Arbitrum","Optimism","Mantle","Metis"],
+    "Polygon":["Bsc","Avalanche","Fantom","Base","Moonbeam","Arbitrum","Optimism","Core","Mantle","Metis"],
+    "Avalanche":["Bsc","Polygon","Fantom","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle","Metis"],
+    "Fantom":["Bsc","Polygon","Avalanche","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle","Metis"],
     "Optimism":["Bsc","Polygon","Base","Avalanche","Fantom","Arbitrum","Moonbeam","Base"],
     "Arbitrum":["Bsc","Polygon","Avalanche","Fantom","Optimism","Moonbeam","Base"],
     "Moonbeam":["Bsc","Polygon","Avalanche","Fantom"],
@@ -12,6 +12,7 @@ export const mainnetRoutes  = {
     "Base":["Bsc","Polygon","Optimism"],
     "Tenet":["Bsc","Polygon","Fantom","Avalanche"],
     "Mantle":["Bsc","Polygon","Fantom","Avalanche"],
+    "Metis":["Bsc","Polygon","Fantom","Avalanche"],
 }
 
 
@@ -133,7 +134,11 @@ export const present_mainnet = [
           id:15,
           name:"Tenet",
           imageSrc:"./blockchainlogos/tenet.jpg"
-        },
+        },{
+          id: 17,
+              name: 'Metis',
+              imageSrc: './blockchainlogos/metis.png', // Replace with your image file path
+        }
     
 
     ]
@@ -190,6 +195,10 @@ export const  mainnet_present_object = {
       id: 16,
           name: 'Mantle',
           imageSrc: './blockchainlogos/Mantle-logo.jpg', // Replace with your image file path
+    },"Metis":{
+      id: 17,
+          name: 'Metis',
+          imageSrc: './blockchainlogos/metis.png', // Replace with your image file path
     }
   }
 
