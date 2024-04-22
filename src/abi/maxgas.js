@@ -21,7 +21,8 @@ export const gasAmount = {
      "Arbitrum":["0.05 ArbETH"],
      "Optimism":["0.23 OPETH"],
      "Mantle":["0.2 MMNT"],
-     "Metis":["0.05 METIS"]
+     "Metis":["0.05 METIS"],
+     "Linea":["0.05 ETH"]
     },
   
     "Polygon":{
@@ -34,7 +35,8 @@ export const gasAmount = {
       "Arbitrum":["0.05 ArbETH"],
       "Optimism":["0.23 OPETH"],
          "Mantle":["0.2 MNT"],
-         "Metis":["0.05 METIS"]
+         "Metis":["0.05 METIS"],
+         "Linea":["0.05 ETH"]
     },
   
     "Fantom":{
@@ -47,7 +49,8 @@ export const gasAmount = {
       "Arbitrum":["0.05 ArbETH"],
       "Optimism":["0.23 OPETH"],
          "Mantle":["0.2 MNT"],
-        "Metis":["0.05 METIS"]
+        "Metis":["0.05 METIS"],
+        "Linea":["0.05 ETH"]
   
     },
   
@@ -61,7 +64,8 @@ export const gasAmount = {
       "Arbitrum":["0.05 ArbETH"],
       "Optimism":["0.23 OPETH"],
          "Mantle":["0.2 MNT"],
-         "Metis":["0.05 METIS"]
+         "Metis":["0.05 METIS"],
+         "Linea":["0.05 ETH"]
     },
     
     "Moonbeam":{
@@ -71,7 +75,8 @@ export const gasAmount = {
       "Avalanche":["15 AVAX"],
       "Core":[],
       "Arbitrum":["0.05 ArbETH"],
-      "Optimism":["0.23 OPETH"]
+      "Optimism":["0.23 OPETH"],
+      "Linea":["0.05 ETH"]
     },
   
     "Core":{
@@ -82,6 +87,7 @@ export const gasAmount = {
       "Moonbeam":[],
        "Arbitrum":[],
      "Optimism":[],
+     "Linea":["0.05 ETH"]
     
     },
     "Arbitrum":{
@@ -93,6 +99,7 @@ export const gasAmount = {
       "Moonbeam":[],
       "Core":[],
      "Optimism":["0.23 OPETH"],
+     "Linea":["0.05 ETH"]
     },
     "Optimism":{
       "Bsc":["1.3 BNB"],
@@ -103,24 +110,41 @@ export const gasAmount = {
       "Moonbeam":["10 GLMR"],
       "Core":[],
      "Arbitrum":[],
+     "Linea":["0.05 ETH"]
     },
     "Base":{
         "Bsc":["1.3 BNB"],
         "Polygon":["300 MATIC"],
-        "Optimism":["0.23 OPETH"]
+        "Optimism":["0.23 OPETH"],
+        "Linea":["0.05 ETH"]
     },
     "Mantle":{
       "Bsc":["1.3 BNB"],
       "Polygon":["300 MATIC"],
       "Fantom":["600 FTM"],
-      "Avalanche":["15 AVAX"]
+      "Avalanche":["15 AVAX"],
+      "Linea":["0.05 ETH"]
     },
     "Metis":{
       "Bsc":["1.3 BNB"],
       "Polygon":["300 MATIC"],
       "Fantom":["600 FTM"],
-      "Avalanche":["15 AVAX"]
-    }
+      "Avalanche":["15 AVAX"],
+      "Linea":["0.05 ETH"]
+    },
+    "Linea":{
+      "Polygon":["600 MATIC"],
+     "Fantom":["100 FTM"],
+     "Avalanche":["15 AVAX"],
+     "Base":["0.05 ETH"],
+     "Moonbeam":["10 GLMR"],
+     "Core":[],
+     "Arbitrum":["0.05 ArbETH"],
+     "Optimism":["0.23 OPETH"],
+     "Tenet":[]
+    
+     
+    },
   
   
   }

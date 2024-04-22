@@ -1,5 +1,5 @@
 import {ethers} from 'ethers';
-import React, { useDebugValue, useEffect, useState } from 'react';
+import React, {   useState } from 'react';
 import {chains,chainIds, nftContracts,endpointContracts,network} from '../abi/chains'
 import {waitForMessageReceived,getMessagesBySrcTxHash} from "@layerzerolabs/scan-client"
 import { presentTestnet,testeObject,testnet_routes } from '../abi/chainoptions';
@@ -213,6 +213,8 @@ function GasRevamped(){
 
   const handleOptionSelect2 = (option) => {
 
+    console.log(option)
+
     try {
       setSelectedOption2(option);
       setIsOpen2(false);
@@ -232,59 +234,58 @@ toast.info('Sending..')
    
 
 
-    // const contract_address = nftContracts[selectedOption1.name];
+    const contract_address = nftContracts[selectedOption1.name];
 
-    // const endpoint_contract = endpointContracts[selectedOption1.name]
+    const endpoint_contract = endpointContracts[selectedOption1.name]
 
 
-    // const Abi = ERC721ABI;
+    const Abi = ERC721ABI;
 
-    // const provider = new ethers.BrowserProvider(window.ethereum);
+    const provider = new ethers.BrowserProvider(window.ethereum);
   
-    // const signer = await provider.getSigner();
+    const signer = await provider.getSigner();
   
-    // const contract = new ethers.Contract(contract_address,Abi,signer);
-    // const endpoint = new ethers.Contract(endpoint_contract,endpointAbi,signer);
+    const contract = new ethers.Contract(contract_address,Abi,signer);
+    const endpoint = new ethers.Contract(endpoint_contract,endpointAbi,signer);
 
-    // let remoteChainId = chainIds[selectedOption2.name];
+    let remoteChainId = chainIds[selectedOption2.name];
 
-    // console.log(remoteChainId,amount)
+    console.log(remoteChainId,amount)
 
-    // let adapterParams = ethers.solidityPacked(
-    // ["uint16", "uint", "uint", "address"],
-    // [2, 250000, ethers.parseUnits(amount.toString(),'ether') , address])
+    let adapterParams = ethers.solidityPacked(
+    ["uint16", "uint", "uint", "address"],
+    [2, 250000, ethers.parseUnits(amount.toString(),'ether') , address])
 
 
    
-    // let fees = await endpoint.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams);
+    let fees = await endpoint.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams);
 
    
 
-    // const gas = ethers.parseUnits((parseFloat(ethers.formatEther(fees[0]))*parseFloat(1.012)).toString(),'ether')
+    const gas = ethers.parseUnits((parseFloat(ethers.formatEther(fees[0]))*parseFloat(1.012)).toString(),'ether')
 
-    // console.log(fees[0],gas)
+    console.log(fees[0],gas)
 
-    // let tx = await (
+    let tx = await (
   
-    // await contract.bridgeGas(            
-    //                               // 'from' address to send tokens
-    //       remoteChainId,                 // remote LayerZero chainId
-    //       ethers.ZeroAddress ,
-    //       adapterParams,                     // amount of tokens to send (in wei)
-    //       { value:gas,gasLimit:300000}
-    //   )
+    await contract.bridgeGas(            
+                                  // 'from' address to send tokens
+          remoteChainId,                 // remote LayerZero chainId
+          ethers.ZeroAddress ,
+          adapterParams,                     // amount of tokens to send (in wei)
+          { value:gas,gasLimit:300000}
+      )
       
-    //  ).wait()
+     ).wait()
   
      
-    //  await waitForMessageReceived(chainIds[selectedOption2.name],tx.transactionHash,3000,).then(async (message) => {
+     await waitForMessageReceived(chainIds[selectedOption2.name],tx.transactionHash,3000,).then(async (message) => {
 
-    //   toast.success(message.status)
+      toast.success(message.status)
 
-    // })
-    console.log( await getMessagesBySrcTxHash(chainIds[selectedOption1.name],"0x30317fb3e3a3df9ef211e235c2e3bd907aa281825db11ddfc188d08084c2b359"))
-
-    await waitForMessageReceived(chainIds[selectedOption2.name],"0x30317fb3e3a3df9ef211e235c2e3bd907aa281825db11ddfc188d08084c2b359",3000,).then(async (message) => {
+    })
+   
+    await waitForMessageReceived(chainIds[selectedOption1.name],'',3000,).then(async (message) => {
 
       toast.success(message.status)
 
@@ -418,19 +419,19 @@ toast.info('Sending..')
                 )}
                 </button>
                 {isOpen2 && (
-                <ul className="dropdown-options"
-                
-                style={{overflow:'visible',zIndex:10,
-                display:'flex',flexDirection:'column'
-                ,flexWrap:'wrap',height:'auto',
-                maxHeight:'300px',width:"170%"}}
-
-                >
-                    
-               {options2.map((option) => (
+              <ul className="dropdown-options" 
+              
+              style={{overflow:'visible',zIndex:10,
+              display:'flex',flexDirection:'column'
+              ,flexWrap:'wrap',height:'auto',
+              maxHeight:'300px',}}
+              
+              
+              >
+                {options2.map((option) => (
                   <li key={option.id} 
                   
-                  style={{border:"1px solid pink",width:"50%",boxSizing: "border-box",
+                  style={{border:"1px solid pink",width:"100%",boxSizing: "border-box",
                   height:"50px",
                   margin:"0.5px",
                   borderRadius:"5px",
@@ -443,9 +444,8 @@ toast.info('Sending..')
                     <span>{option.name}</span>
                   </li>
                 ))}
-                    
-                </ul>
-                )}
+              </ul>
+            )}
             </div>
         
                 </div>
