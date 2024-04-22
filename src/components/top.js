@@ -5,6 +5,7 @@ import  {Balance} from '../abi/balance';
 import {Link } from 'react-router-dom';
 import './navbar.css'
 import PopupMessage from './popup';
+import { toast } from 'react-toastify';
 
 
 function Header(){
@@ -18,7 +19,6 @@ function Header(){
 
   const [balance, setBalance] = useState(0)
 
-  const [error,setError] = useState('')
 
   
   const [showMenu, setShowMenu] = useState(false);
@@ -29,7 +29,11 @@ function Header(){
 
   const [ url,setUrl] = useState('')
 
-  const provider = window.ethereum
+  const provider = window.ethereum;
+
+console.log( window.location.href)
+
+
 
   useEffect(
 
@@ -78,9 +82,9 @@ function Header(){
         }
         } catch (error) {
           if(!provider){
-            setError("Error: Metamask not detected")
+            toast.error("Error: Metamask not detected")
           } else {
-          setError("Wallet Not Connected")
+          toast.error("Wallet Not Connected")
           }
         }
 
@@ -105,7 +109,8 @@ const pageClicked =(args)=>{
   setPage(args)
   
 }
-  
+
+
  
 
 
@@ -176,7 +181,7 @@ try {
 
   }
 } catch (error) {
-  setError("Connected")
+  toast.error("Connected")
 }
 
  }
@@ -193,10 +198,11 @@ return (
       <nav class="navigation">
     
         <ul  className={`navbar-items ${showMenu ? "show" : ""}`}>
-          <li className={`navbar-clicked ${page==='home'?"show":""}`} onClick={e=>pageClicked("home")} style={{background: "none"}}><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid ` }} >Home</Link></li>
+          <li className={`navbar-clicked ${page==='home'?"show":""}`} onClick={e=>pageClicked('home')} style={{background: "none"}}><Link to="/" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid ` }} >Home</Link></li>
+          <li className={`navbar-clicked ${page==='gas'?"show":""}`} onClick={e=>pageClicked("gas")}><Link to="/gasrefill" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid `}} >Gas</Link></li>
           <li className={`navbar-clicked ${page==='nft'?"show":""}`} onClick={e=>pageClicked("nft")}><Link to="/nfts" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid `}}>NFT</Link></li>
           <li className={`navbar-clicked ${page==='token'?"show":""}`} onClick={e=>pageClicked("token")}><Link to="/tokens" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid  `}}>Tokens</Link></li>
-          <li className={`navbar-clicked ${page==='gas'?"show":""}`} onClick={e=>pageClicked("gas")}><Link to="/gasrefill" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",paddingBottom:"10px",color:"white", borderBottom: `0px solid `}} >Gas</Link></li>
+       
         </ul>
 
         <div className="menu-icon" onClick={toggleMenu}>
@@ -212,7 +218,6 @@ return (
     </div>
   </header>
 
-  <PopupMessage error={error}/>
 </div>
     )
  

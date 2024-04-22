@@ -1,18 +1,20 @@
 
 
 export const mainnetRoutes  = {
-    "Bsc":["Polygon","Avalanche","Fantom","Base","Moonbeam","Core","Arbitrum","Optimism","Mantle","Metis"],
-    "Polygon":["Bsc","Avalanche","Fantom","Base","Moonbeam","Arbitrum","Optimism","Core","Mantle","Metis"],
-    "Avalanche":["Bsc","Polygon","Fantom","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle","Metis"],
-    "Fantom":["Bsc","Polygon","Avalanche","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle","Metis"],
-    "Optimism":["Bsc","Polygon","Base","Avalanche","Fantom","Arbitrum","Moonbeam","Base"],
-    "Arbitrum":["Bsc","Polygon","Avalanche","Fantom","Optimism","Moonbeam","Base"],
-    "Moonbeam":["Bsc","Polygon","Avalanche","Fantom"],
+    "Bsc":["Polygon","Avalanche","Fantom","Base","Moonbeam","Core","Arbitrum","Optimism","Mantle","Metis","Linea"],
+    "Polygon":["Bsc","Avalanche","Fantom","Base","Moonbeam","Arbitrum","Optimism","Core","Mantle","Metis","Linea"],
+    "Avalanche":["Bsc","Polygon","Fantom","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle","Metis","Linea"],
+    "Fantom":["Bsc","Polygon","Avalanche","Moonbeam","Core","Arbitrum","Optimism","Base","Mantle","Metis","Linea"],
+    "Optimism":["Bsc","Polygon","Base","Avalanche","Fantom","Arbitrum","Moonbeam","Base","Linea"],
+    "Arbitrum":["Bsc","Polygon","Avalanche","Fantom","Optimism","Moonbeam","Base","Linea"],
+    "Moonbeam":["Bsc","Polygon","Avalanche","Fantom","Linea"],
     "Core":["Bsc","Polygon"],
-    "Base":["Bsc","Polygon","Optimism"],
-    "Tenet":["Bsc","Polygon","Fantom","Avalanche"],
+    "Base":["Bsc","Polygon","Optimism","Arbitrum","Moonbeam","Linea"],
+    "Tenet":["Bsc","Polygon","Fantom","Avalanche","Linea"],
     "Mantle":["Bsc","Polygon","Fantom","Avalanche"],
     "Metis":["Bsc","Polygon","Fantom","Avalanche"],
+    "Linea": ["Bsc","Polygon","Avalanche","Fantom","Base","Moonbeam","Core","Arbitrum","Optimism","Tenet"],
+
 }
 
 
@@ -138,7 +140,13 @@ export const present_mainnet = [
           id: 17,
               name: 'Metis',
               imageSrc: './blockchainlogos/metis.png', // Replace with your image file path
+        },
+        {
+          id: 18,
+              name: 'Linea',
+              imageSrc: './blockchainlogos/linea.png', // Replace with your image file path
         }
+    
     
 
     ]
@@ -199,6 +207,10 @@ export const  mainnet_present_object = {
       id: 17,
           name: 'Metis',
           imageSrc: './blockchainlogos/metis.png', // Replace with your image file path
+    },"Linea":{
+      id: 18,
+          name: 'Linea',
+          imageSrc: './blockchainlogos/linea.png', // Replace with your image file path
     }
   }
 

@@ -144,14 +144,8 @@ export const chains = {
         nativeCurrency: { name: "GLMR", decimals: 18, symbol: "GLMR" },
         blockExplorerUrls: ['https://moonbeam.moonscan.io'],
         iconUrls: ['']
-      },"Linea":{
-        chainId: "", //"0x118":"Zksync-Testnet"
-        rpcUrls: ['https://mainnet.infura.io/v3/'],
-        chainName: "Linea Mainnet",
-        nativeCurrency: { name: "ETH", decimals: 18, symbol: "ETH" },
-        blockExplorerUrls: [''],
-        iconUrls: ['']
-      },"Zksync":{
+      }
+      ,"Zksync":{
         chainId: "0x144", //"0x118":"Zksync-Testnet"
         rpcUrls: ['https://zksync2-mainnet.zksync.io'],
         chainName: "zkSync Era",
@@ -216,6 +210,14 @@ export const chains = {
         iconUrls: ['']
       },"Metis":{
         chainId: "0x440",
+      },
+      "Linea":{
+        chainId: "0xE708", //"0x118":"Zksync-Testnet"
+        rpcUrls: ['https://rpc.linea.build'],
+        chainName: "Linea Mainnet",
+        nativeCurrency: { name: "ETH", decimals: 18, symbol: "ETH" },
+        blockExplorerUrls: ['https://lineascan.build'],
+        iconUrls: ['']
       }
 
 }
@@ -254,7 +256,8 @@ export const network = {
   "0x45C":"Core",
   "0x2105":"Base",
   "0x617":"Tenet",
-  "0x440":"Metis"
+  "0x440":"Metis",
+  "0xE708":"Linea"
 }
 
 export const endpointContracts = {
@@ -274,6 +277,7 @@ export const endpointContracts = {
   "Core":"0x9740FF91F1985D8d2B71494aE1A2f723bb3Ed9E4",
   "Tenet":"0x2D61DCDD36F10b22176E0433B86F74567d529aAa",
   "Metis":"0x9740FF91F1985D8d2B71494aE1A2f723bb3Ed9E4",
+  "Linea":"0xb6319cC6c8c27A8F5dAF0dD3DF91EA35C4720dd7",
   
 
   "Goerli": "0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23",
@@ -325,7 +329,8 @@ export const tokenContracts = {
   "Linea":"",
   "Base":"",
   "Mantle":"",
-  "Core":"0x79FbAa67A7E8f59356e5CED082DCd93769F3B8F0"
+  "Core":"0x79FbAa67A7E8f59356e5CED082DCd93769F3B8F0",
+  
 }
 
 export const nftContracts = {
@@ -356,12 +361,12 @@ export const nftContracts = {
   "Optimism":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Arbitrum":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Avalanche":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
-  "Linea":"",
   "Base":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Mantle":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Core":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
   "Tenet":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
-  "Metis":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd"
+  "Metis":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd",
+  "Linea":"0xcdF79E85a5e8FFd8D93def3D3c7580B8aB8870cd"
   
 }
 
@@ -440,8 +445,5 @@ export const chainIds = {
   "Moonriver":        167,
   "Core" :            153,
   "Tenet":173,
-  "Metis":151
-
-
-
+  "Metis":151,
 }

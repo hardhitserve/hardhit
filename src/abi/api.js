@@ -16,7 +16,8 @@ export const tickers = {
     "zkSync":"ethereum",
     "zkEvm":"ethereum",
     "Core":"coredaoorg",
-    "Metis":"metis-token"
+    "Metis":"metis-token",
+    "Linea":'ethereum'
     
 }
 

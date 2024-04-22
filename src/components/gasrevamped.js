@@ -11,6 +11,8 @@ import { gasAmount } from '../abi/maxgas';
 import {fetchData,tokenTickers} from '../abi/api';
 import './gasrevamp.css'
 import _ from 'lodash';
+import { toast } from 'react-toastify';
+
 
 
 function GasRevamped(){
@@ -24,7 +26,7 @@ function GasRevamped(){
   const [options2,setOption2] = useState(null);
   const [address, setAddress] = useState("");
   const [ amount, setAmount] = useState('');
-  const [errorMessage,setError]= useState("");
+
   const [routes, setRoutes] = useState(mainnetRoutes)
   const [object,setObject] = useState(mainnet_present_object)
   const [color,setColor] = useState("white")
@@ -49,13 +51,14 @@ function GasRevamped(){
 
    
 
-    setAmount(ObtainedAmount)
+    setAmount(parseFloat(ObtainedAmount.toFixed(5)))
 
-    await sendReal(ObtainedAmount)
+     await sendReal(parseFloat(ObtainedAmount.toFixed(5)))
 
 
     } catch (error) {
-      setError("Select From and To chains")
+     
+      toast.error(error.message)
     }
 
 
@@ -118,7 +121,7 @@ function GasRevamped(){
           //  method: 'wallet_addEthereumChain',
           //  params: [chains[args]],
           //  }).then(response => console.log(""))
-          setError("Chain not detected")
+          toast.error("Chain not detected")
           
          }
          }
@@ -180,7 +183,7 @@ function GasRevamped(){
       
       setIsOpen2(!isOpen2);
     } else {
-      setError("Select From Chain")
+      toast.error("Select From Chain")
     }
 
    
@@ -203,7 +206,7 @@ function GasRevamped(){
       
       setOption2(options_routes2)
     } catch (error) {
-      setError(error.reason)
+      toast.error(error.reason)
     }
    
   };
@@ -214,7 +217,7 @@ function GasRevamped(){
       setSelectedOption2(option);
       setIsOpen2(false);
     } catch (error) {
-      setError(error.reason)
+      toast.error(error.reason)
     }
    
   };
@@ -223,72 +226,87 @@ function GasRevamped(){
 
 const send = async ()=>{
 
+toast.info('Sending..')
+
   try {
-
-
-    const contract_address = nftContracts[selectedOption1.name];
-
-    const endpoint_contract = endpointContracts[selectedOption1.name]
-
-    const Abi = ERC721ABI;
-
-    const provider = new ethers.BrowserProvider(window.ethereum);
-  
-    const signer = await provider.getSigner();
-  
-    const contract = new ethers.Contract(contract_address,Abi,signer);
-    const endpoint = new ethers.Contract(endpoint_contract,endpointAbi,signer);
-
-    let remoteChainId = chainIds[selectedOption2.name];
-
-    let adapterParams = ethers.solidityPacked(
-    ["uint16", "uint", "uint", "address"],
-    [2, 250000, ethers.parseUnits(amount.toString(),'ether') , address])
    
-    let fees = await endpoint.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams);
-
-    const gas = ethers.parseUnits((parseFloat(ethers.formatEther(fees[0]))*parseFloat(1.012)).toString(),'ether')
 
 
-    let tx = await (
+    // const contract_address = nftContracts[selectedOption1.name];
+
+    // const endpoint_contract = endpointContracts[selectedOption1.name]
+
+
+    // const Abi = ERC721ABI;
+
+    // const provider = new ethers.BrowserProvider(window.ethereum);
   
-    await contract.bridgeGas(            
-                                  // 'from' address to send tokens
-          remoteChainId,                 // remote LayerZero chainId
-          ethers.ZeroAddress ,
-          adapterParams,                     // amount of tokens to send (in wei)
-          { value:gas,gasLimit:300000}
-      )
+    // const signer = await provider.getSigner();
+  
+    // const contract = new ethers.Contract(contract_address,Abi,signer);
+    // const endpoint = new ethers.Contract(endpoint_contract,endpointAbi,signer);
+
+    // let remoteChainId = chainIds[selectedOption2.name];
+
+    // console.log(remoteChainId,amount)
+
+    // let adapterParams = ethers.solidityPacked(
+    // ["uint16", "uint", "uint", "address"],
+    // [2, 250000, ethers.parseUnits(amount.toString(),'ether') , address])
+
+
+   
+    // let fees = await endpoint.estimateFees(remoteChainId,contract_address, "0x", false, adapterParams);
+
+   
+
+    // const gas = ethers.parseUnits((parseFloat(ethers.formatEther(fees[0]))*parseFloat(1.012)).toString(),'ether')
+
+    // console.log(fees[0],gas)
+
+    // let tx = await (
+  
+    // await contract.bridgeGas(            
+    //                               // 'from' address to send tokens
+    //       remoteChainId,                 // remote LayerZero chainId
+    //       ethers.ZeroAddress ,
+    //       adapterParams,                     // amount of tokens to send (in wei)
+    //       { value:gas,gasLimit:300000}
+    //   )
       
-     ).wait()
+    //  ).wait()
   
      
-     await waitForMessageReceived(chainIds[selectedOption2.name],tx.transactionHash,3000,).then(async (message) => {
+    //  await waitForMessageReceived(chainIds[selectedOption2.name],tx.transactionHash,3000,).then(async (message) => {
 
-      setError(message.status)
+    //   toast.success(message.status)
+
+    // })
+    console.log( await getMessagesBySrcTxHash(chainIds[selectedOption1.name],"0x30317fb3e3a3df9ef211e235c2e3bd907aa281825db11ddfc188d08084c2b359"))
+
+    await waitForMessageReceived(chainIds[selectedOption2.name],"0x30317fb3e3a3df9ef211e235c2e3bd907aa281825db11ddfc188d08084c2b359",3000,).then(async (message) => {
+
+      toast.success(message.status)
 
     })
 
-      const {messages} = await getMessagesBySrcTxHash(
-        chainIds[selectedOption2.name],tx.transactionHash
-      );
 
   
   } catch (error) {
  try {
   if((error.reason).includes("dstNativeAmt too large")){
-    setError("Reduce the Bridge amount")
+    toast.error("Reduce the Bridge amount")
   }
 
   if((error.reason).includes("not enough native for fees")){
-    setError("Insufficient balance in your wallet")
+    toast.error("Insufficient balance in your wallet")
   }
  
   if((error.reason).includes("Rejected")){
-    setError("Transaction Cancelled")
+    toast.error("Transaction Cancelled")
   }
  } catch (error) {
-       setError(error.reason)
+       toast.error(error.reason)
  }
    
   }}
@@ -318,8 +336,7 @@ const send = async ()=>{
 
     setGasConsumed(ethers.formatEther(fees[0]))
 
-   
-
+  
     
 
   }
@@ -409,26 +426,24 @@ const send = async ()=>{
                 maxHeight:'300px',width:"170%"}}
 
                 >
-                    { 
-                options2.map((option) => 
-                    (
-                    <li key={option.id} 
                     
-                    style={{border:"1px solid pink",width:"50%",boxSizing: "border-box",
-                    height:"50px",
-                    margin:"0.5px",
-                    borderRadius:"5px" 
-                    }} 
-
-                    onClick={() => handleOptionSelect2(option)}>
-                        <img src={option.imageSrc} alt={option.name} />
-                        <span>{option.name}</span>
-                    </li>
-                    
-                    )
+               {options2.map((option) => (
+                  <li key={option.id} 
+                  
+                  style={{border:"1px solid pink",width:"50%",boxSizing: "border-box",
+                  height:"50px",
+                  margin:"0.5px",
+                  borderRadius:"5px",
+                  backgroundColor:'whitesmoke'
                 
-                    )
-                    }
+                }} 
+                  
+                  onClick={() => handleOptionSelect2(option)}>
+                    <img src={option.imageSrc} alt={option.name} />
+                    <span>{option.name}</span>
+                  </li>
+                ))}
+                    
                 </ul>
                 )}
             </div>
@@ -510,7 +525,6 @@ const send = async ()=>{
 
      
       <Footer style={{marginTop:"50px",marginBottom:"0px"}} />
-      <PopupMessage error={errorMessage? errorMessage:null} />
      </div>
    
     )

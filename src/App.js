@@ -8,8 +8,12 @@ import DropdownMenu from './components/dropdownmenu'
 import './components/main.css'
 import Gas from './components/gas';
 import GasRevamped from './components/gasrevamped';
+import Messaging from './messaging/messagingcomponent';
+import MessageDisplay from './messaging/contracts/testmessages';
 
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
 
   
@@ -42,8 +46,13 @@ function App() {
 
            <Route path="/gasrefill" element={ < GasRevamped/>}>
            </Route>
+           <Route path="/message" element={ <Messaging />}>
+          
+           
+           </Route>
         </Routes>
     </div>
+    <ToastContainer/>
     </Router>
   );
 }

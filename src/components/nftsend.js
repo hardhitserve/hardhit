@@ -10,6 +10,7 @@ import Footer from './footer';
 import NftIdAlchemy from './nftidalchemy';
 import { networksApi } from './nftidalchemy';
 import './gasrevamp.css'
+import { toast } from 'react-toastify';
 
 function NftSend(){
   const [isOpen1, setIsOpen1] = useState(false);
@@ -20,7 +21,6 @@ function NftSend(){
   const [options2,setOption2] = useState(null);
   const [address, setAddress] = useState("");
   const [ tokenID, setTokenID] = useState('');
-  const [errorMessage,setError] = useState("")
   const [number,setNumber] = useState('');
   const [data, setdata] = useState([])
   const [addressArray,setAddressArray] = useState([])
@@ -31,6 +31,7 @@ function NftSend(){
   const provider = window.ethereum;
   const [ networkset,setNetworkSet] = useState('')
   const abiEncode = new ethers.AbiCoder();
+  const [totalSupply,setTotalSupply] = useState('')
   
 
   useEffect(
@@ -68,7 +69,7 @@ function NftSend(){
 
           } 
         } catch (error) {
-          setError("Wallet Not Connected")
+          toast.error("Wallet Not Connected")
         }
       }
 
@@ -162,7 +163,7 @@ function NftSend(){
     if(selectedOption1){
       setIsOpen2(!isOpen2);
     } else {
-      setError("Select From Chain")
+      toast.error("Select From Chain")
     }
   };
 
@@ -182,7 +183,7 @@ function NftSend(){
       
       setOption2(options_routes2)
     } catch (error) {
-      setError(error.reason)
+      toast.error(error.reason)
     }
   };
 
@@ -192,7 +193,7 @@ function NftSend(){
       setSelectedOption2(option);
       setIsOpen2(false);
     } catch (error) {
-      setError(error.reason)
+      toast.error(error.reason)
     }
    
   };
@@ -209,7 +210,9 @@ function NftSend(){
     const maxMintId = await contract.maxMintId();
     const nextMintId = await contract.nextMintId();
     const number = (parseInt(maxMintId)-parseInt(nextMintId)).toString()
-    setNumber(number)
+    
+
+    setNumber(number<0?0:number)
    
   } catch (error) {
 
@@ -219,6 +222,7 @@ function NftSend(){
  
 
   const mint = async ()=>{
+    toast.info('Minting..')
 
     try {
       let abi = ERC721ABI;
@@ -230,18 +234,18 @@ function NftSend(){
 
       let tx = await( await contract.mint(
       {value:gas}
-)
-      
+)      
       ).wait()
 
-      let onftTokenId = await provider.getTransaction(tx.transactionHash)
-    
+    console.log(tx)
 
-      tx.transactionHash?setError("minted"):setError("Minted")
+  
+  toast.success(tx?.hash?`Successfully Minted ID:${parseInt(Number(tx.logs[0].topics[3]))}`:"Mint Unsuccesful..")
+
      
     } catch (error) {
      
-      setError((error.reason))
+     toast.error(error.message)
 
     }
    
@@ -285,22 +289,21 @@ const send = async ()=>{
           { value: gas,gasLimit:300000 }
     )
  
+console.log(tx.hash)
   
-    
-  
-    await waitForMessageReceived(chainIds[selectedOption2.name],tx.hash).then(async (message) => {
+    await waitForMessageReceived(chainIds[selectedOption2.name],tx.hash,3000).then(async (message) => {
+
+      console.log(message)
      
-   
+  
+  toast.success(message.status)
 
-    setError(message.status)
-
-      
     
     })
    
   } catch (error) {
     
-  setError(error.reason)
+  toast.error(error.reason)
  
   }
 
@@ -352,10 +355,11 @@ const send = async ()=>{
                 {options.map((option) => (
                   <li key={option.id}
 
-                  style={{border:"1px solid pink",width:"50%",boxSizing: "border-box",
+                  style={{border:"1px solid pink",width:"60%",boxSizing: "border-box",
                   height:"50px",
                   margin:"0.5px",
-                  borderRadius:"5px" 
+                  borderRadius:"5px",
+                  backgroundColor:'whitesmoke'
                 }} 
 
                    onClick={() => handleOptionSelect1(option)}>
@@ -387,16 +391,19 @@ const send = async ()=>{
               style={{overflow:'visible',zIndex:10,
               display:'flex',flexDirection:'column'
               ,flexWrap:'wrap',height:'auto',
-              maxHeight:'300px',width:"170%"}}
+              maxHeight:'300px',}}
+              
               
               >
                 {options2.map((option) => (
                   <li key={option.id} 
                   
-                  style={{border:"1px solid pink",width:"50%",boxSizing: "border-box",
+                  style={{border:"1px solid pink",width:"100%",boxSizing: "border-box",
                   height:"50px",
                   margin:"0.5px",
-                  borderRadius:"5px" 
+                  borderRadius:"5px",
+                  backgroundColor:'whitesmoke'
+                
                 }} 
                   
                   onClick={() => handleOptionSelect2(option)}>
@@ -421,7 +428,7 @@ const send = async ()=>{
           {/* <Link to="/mint" style={{width:"100%", height:"100%", background:"none",textDecoration:"none",color:"white",backgroundColor:"#e10bc1",padding:6,border: "2px solid #e10bc1",borderRadius:5}} disabled>Mint</Link> */}
           {/* <img src="https://ipfs.io/ipfs/QmdvdVhJhVRdoApEmAy6A5AsihrVi3EN8rxNbxsawhzpt7" style={{width:"100px","height":"100px",marginLeft:"10px",marginBottom:"10px",border:"2px solid pink"}} alt="" /> */}
           <button style={{width:"auto", background:"none",textDecoration:"none",color:"white",padding:6,border: "2px solid #53a7df",borderRadius:5,backgroundColor:''}} onClick={mint}>Mint</button>
-          <p style={{color:"whitesmoke"}}>{number?number:"Not Avaialble"}/1000</p>
+          <p style={{color:"whitesmoke"}}>{number?number<0?0:number:"∞"}/1000</p>
         </div>
         <div className="sendButon" style={{width:"100%",marginTop:"10px",backgroundColor:"#26292c",padding:5,borderRadius:5,display:'flex',flexDirection:'column',alignItems:'center'}}>
 
@@ -435,7 +442,7 @@ const send = async ()=>{
    if(selectedOption1){
     send()
   } else{
-    setError("Select from and To chains")
+   toast.info("Select from and To chains")
   }
 }
  }/>
@@ -472,7 +479,6 @@ const send = async ()=>{
           }
           }/>
 
-      <PopupMessage error={errorMessage} />
       <Footer/>
 
 
